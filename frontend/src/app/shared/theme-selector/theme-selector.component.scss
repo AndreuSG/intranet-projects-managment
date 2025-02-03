@@ -1,0 +1,18 @@
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  float: right;
+  margin: 10px 20px;
+}
+
+.theme-toggle {
+  --mat-sys-on-primary: #fff;
+  --mat-sys-primary: #4a4a6a;
+  --mat-sys-outline: #fff;
+  --mat-sys-surface-variant: #ccc;
+}
+
+.dark-icon, .light-icon {
+  font-size: 24px;
+}
