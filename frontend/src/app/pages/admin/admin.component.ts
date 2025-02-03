@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  standalone: true,
   selector: 'app-admin',
-  imports: [],
+  imports: [
+    MatIconModule
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
