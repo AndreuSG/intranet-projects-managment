@@ -1,6 +1,26 @@
-.page-title {
+.page-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
-  margin-left: 41px;
+
+  .page-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.page-subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  shared-search-bar {
+    width: 50%;
+  }
+
+  .extra-actions {
+    display: flex;
+    gap: 20px;
+  }
 }
