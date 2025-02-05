@@ -2,11 +2,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .page-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 }
 
-.page-title {
+.page-subheader {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
-  margin-left: 41px;
+
+  shared-search-bar {
+    width: 50%;
+  }
+
+  .extra-actions {
+    display: flex;
+    gap: 20px;
+  }
 }

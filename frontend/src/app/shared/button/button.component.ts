@@ -47,7 +47,8 @@ export class ButtonComponent {
   private colorMap: { [key: string]: string } = {
     primary: '#444466',
     secondary: '#DCDCDC',
-    danger: '#9A0C0C'
+    danger: '#9A0C0C',
+    success: '#28A745',
   };
 
   onClick() {

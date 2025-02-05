@@ -4,5 +4,18 @@
     <back-button></back-button>
   </div>
 
-  <shared-button text="Afegir" icon="person_add"></shared-button>
+  <shared-button text="Afegir" icon="person_add" (click)="addStudent()"></shared-button>
+</div>
+
+<div class="page-subheader">
+  <shared-search-bar placeholder="Cercar estudiants..." (search)="onSearch($event)"></shared-search-bar>
+
+  <div class="extra-actions">
+    <shared-button [text]="filterText" icon="filter_alt"></shared-button>
+    <shared-button text="Donar de baixa" icon="delete" (click)="deleteStudents()" type="danger"></shared-button>
+  </div>
+</div>
+
+<div class="page-content">
+
 </div>
