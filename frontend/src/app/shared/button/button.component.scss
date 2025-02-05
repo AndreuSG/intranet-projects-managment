@@ -1,4 +1,16 @@
 button {
   --mat-sys-label-large-font: 'Poppins';
   --mat-sys-label-large-size: 1rem;
+  box-shadow: unset;
+  height: 40px;
+  font-weight: 400;
+
+  &:hover {
+    box-shadow: unset;
+  }
+
+  mat-icon {
+    height: 20px;
+    width: fit-content;
+  }
 }
