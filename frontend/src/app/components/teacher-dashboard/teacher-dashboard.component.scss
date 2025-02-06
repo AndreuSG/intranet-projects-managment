@@ -1,13 +1,13 @@
 .dashboard {
-    padding: 20px;
-    max-width: 1200px;
     margin: auto;
   
+    .header {
+      display: flex;
+    }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(315px, 1fr));
       gap: 40px;
-      max-width: 1200px;
       margin: auto;
     }
   

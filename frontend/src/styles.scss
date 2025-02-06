@@ -1,6 +1,7 @@
 html, body { height: 100%; }
 body { 
     margin: 0; 
+    padding: 3% 5%;
     font-family: "Poppins", Roboto, "Helvetica Neue", sans-serif; 
     h1 {
         text-align: left;
@@ -15,3 +16,15 @@ body {
         color: #444466;
     }
 }
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    .page-title {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+  }
