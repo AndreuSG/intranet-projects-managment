@@ -1,12 +1,6 @@
-<div class="page-header">
-  <div class="page-title">
-  <h1>Gestió de projectes disponibles al centre</h1>
-    <back-button></back-button>
-  </div>
-</div>
 <div class="project-list">
   <div class="grid">
-    <div class="card" *ngFor="let project of projects"> <!--[routerLink]="'/project/' + project.id"-->
+    <div class="card" *ngFor="let project of filteredProjects"> <!--[routerLink]="'/project/' + project.id"-->
       <div class="card-header">
         <span class="category">{{ project.category }}</span>
       </div>
@@ -19,6 +13,9 @@
       </div>
     </div>
   </div>
+
+  <div class="no-results" *ngIf="filteredProjects.length === 0">
+    No s'han trobat projectes
+  </div>
 </div>
 
-  
