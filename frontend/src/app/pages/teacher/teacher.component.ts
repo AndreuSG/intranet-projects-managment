@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TeacherDashboardComponent } from '../../components/teacher-dashboard/teacher-dashboard.component';
+import { TeacherDashboardComponent } from '../../components/teacher/teacher-dashboard/teacher-dashboard.component';
 
 @Component({
   selector: 'app-teacher',

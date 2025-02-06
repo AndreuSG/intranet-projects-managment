@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BackButtonComponent } from '../../shared/back-button/back-button.component';
+import { BackButtonComponent } from '../../../../shared/back-button/back-button.component';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
