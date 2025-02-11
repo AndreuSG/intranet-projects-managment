@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Crear Proyecto</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Título</mat-label>
+    <input matInput [formControl]="titleControl">
+    <mat-error *ngIf="titleControl.invalid">El título es obligatorio</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Categoría</mat-label>
+    <input matInput [formControl]="categoryControl">
+    <mat-error *ngIf="categoryControl.invalid">La categoría es obligatoria</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Creador</mat-label>
+    <input matInput [formControl]="creatorControl">
+    <mat-error *ngIf="creatorControl.invalid">El creador es obligatorio</mat-error>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="titleControl.invalid || categoryControl.invalid || creatorControl.invalid">
+    Guardar
+  </button>
+</div>
