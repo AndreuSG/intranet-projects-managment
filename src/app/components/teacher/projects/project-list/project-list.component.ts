@@ -3,12 +3,17 @@ import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { Project } from '../../../../models/interfaces/project.interface';
 import { Course } from '../../../../models/enums/course.enum';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  imports: [CommonModule, MatIcon]
+  imports: [
+    CommonModule,
+    MatIcon,
+    RouterModule,
+  ]
 })
 export class ProjectListComponent {
   @Input()

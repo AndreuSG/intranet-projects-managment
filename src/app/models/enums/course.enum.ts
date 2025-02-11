@@ -1,7 +1,7 @@
 export enum Course {
-  daw = 'DAW2',
-  asix = 'ASIX2',
-  smx = 'SMX2',
+  daw = 'DAW',
+  asix = 'ASIX',
+  smx = 'SMX',
   iabd = 'IAiBD',
   dvrv = 'DViRV',
 }

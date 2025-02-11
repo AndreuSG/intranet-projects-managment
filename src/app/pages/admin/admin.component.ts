@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { BackButtonComponent } from "../../shared/back-button/back-button.component";
-import { ButtonComponent } from "../../shared/button/button.component";
-import { SearchBarComponent } from "../../shared/search-bar/search-bar.component";
-import { TableComponent } from "../../shared/table/table.component";
+import { BackButtonComponent } from "../../shared/components/back-button/back-button.component";
+import { ButtonComponent } from "../../shared/components/button/button.component";
+import { SearchBarComponent } from "../../shared/components/search-bar/search-bar.component";
+import { TableComponent } from "../../shared/components/table/table.component";
 import { Student } from '../../models/interfaces/student.interface';
 import { Course } from '../../models/enums/course.enum';
 
