@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-project-list',
+  selector: 'project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
   imports: [CommonModule, MatIcon]

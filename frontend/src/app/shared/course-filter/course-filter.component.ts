@@ -17,6 +17,8 @@ export class CourseFilterComponent {
   @Output()
   courseSelected = new EventEmitter<string>();
 
+  selectedCourse: string = 'Filtrar per curs';
+
   courses = [
     'Tots els cursos',
     'DAW',
@@ -27,6 +29,7 @@ export class CourseFilterComponent {
   ]
 
   courseFilter(course: string) {
+    this.selectedCourse = course;
     this.courseSelected.emit(course);
   }
 }

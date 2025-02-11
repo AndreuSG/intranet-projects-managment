@@ -9,8 +9,8 @@
 
   <div class="extra-actions">
     <shared-course-filter (courseSelected)="onFilterSelected($event)"></shared-course-filter>
-    <shared-button text="Afegir projecte" icon="library_add" type="success"></shared-button>
+    <shared-button text="Afegir projecte" icon="library_add" type="success" (click)="openDialog()"></shared-button>
   </div>
 </div>
 
-<app-project-list [search]="search" [selectedCourse]="selectedCourse"></app-project-list>
+<project-list [search]="search" [selectedCourse]="selectedCourse"></project-list>
