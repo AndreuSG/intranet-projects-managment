@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { Project } from '../../../../models/interfaces/project.interface';
+import { Course } from '../../../../models/enums/course.enum';
 
 @Component({
   selector: 'project-list',
@@ -15,16 +17,16 @@ export class ProjectListComponent {
   @Input()
   selectedCourse: string = '';
 
-  projects = [
-    { category: "ASIX", title: "AWS amb Terraform", creator: "David Bancells" },
-    { category: "DAW", title: "CMS agència de viatges", creator: "Xavier Martín" },
-    { category: "DViRV", title: "Crear un joc 3D amb Unity", creator: "Ainhowi Zaldúa Sureda" },
-    { category: "IAiBD", title: "Ni idea", creator: "Francesc Barragan" },
-    { category: "DAW", title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { category: "ASIX", title: "AWS amb Terraform", creator: "David Bancells" },
-    { category: "DAW", title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { category: "DAW", title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { category: "DAW", title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" }
+  projects: Project[] = [
+    { id: 1, category: Course.asix, title: "AWS amb Terraform", creator: "David Bancells" },
+    { id: 2, category: Course.daw, title: "CMS agència de viatges", creator: "Xavier Martín" },
+    { id: 3, category: Course.dvrv, title: "Crear un joc 3D amb Unity", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 4, category: Course.iabd, title: "Ni idea", creator: "Francesc Barragan" },
+    { id: 5, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 6, category: Course.asix, title: "AWS amb Terraform", creator: "David Bancells" },
+    { id: 7, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 8, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 9, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" }
   ];
 
   filteredProjects = [...this.projects];

@@ -4,8 +4,9 @@ import { BackButtonComponent } from "../../../shared/back-button/back-button.com
 import { SearchBarComponent } from "../../../shared/search-bar/search-bar.component";
 import { ButtonComponent } from "../../../shared/button/button.component";
 import { CourseFilterComponent } from "../../../shared/course-filter/course-filter.component";
-import { MatDialog } from '@angular/material/dialog';
-import { ProjectFormComponent, ProjectFormData } from '../../../components/teacher/projects/project-form/project-form.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ProjectFormComponent } from '../../../components/teacher/projects/project-form/project-form.component';
+import { Project } from '../../../models/interfaces/project.interface';
 
 @Component({
   selector: 'app-project',
@@ -24,6 +25,8 @@ export class ProjectComponent {
   search: string = '';
   selectedCourse: string = '';
 
+  projectFormDialogRef: MatDialogRef<ProjectFormComponent, Project> | undefined;
+
   constructor(public dialog: MatDialog) {}
 
   onFilterSelected(course: string) {
@@ -33,16 +36,22 @@ export class ProjectComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ProjectFormComponent, {
+    if (this.projectFormDialogRef) return;
+
+    this.projectFormDialogRef = this.dialog.open(ProjectFormComponent, {
       width: '400px',
-      data: { title: '', category: '', creator: '' }
+      data: {
+        title: '',
+        category: '',
+        creator: ''
+      }
     });
 
-    dialogRef.afterClosed().subscribe((result: ProjectFormData | undefined) => {
+    this.projectFormDialogRef.afterClosed().subscribe((result: Project | undefined) => {
       if (result) {
         console.log('Proyecto creado:', result);
-        // Aquí puedes manejar el proyecto creado, por ejemplo, enviarlo a una API
       }
+      this.projectFormDialogRef = undefined;
     });
   }
 }
