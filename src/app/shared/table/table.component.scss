@@ -1,0 +1,142 @@
+/* ==============================
+  Contenedor Principal de la Tabla
+============================== */
+.table-container {
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* ==============================
+  Tabla Principal
+============================== */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+
+  /* ==============================
+    Encabezado de la Tabla (thead)
+  ============================== */
+  thead {
+    background: #3f3d56;
+    display: table;
+    width: 100%;
+
+    th {
+      color: white;
+      font-weight: normal;
+      padding: 10px;
+      text-align: left;
+      vertical-align: middle;
+
+      &:first-child {
+        padding-left: 27px;
+      }
+
+      &:last-child {
+        padding-right: 27px;
+      }
+    }
+  }
+
+  /* ==============================
+    Cuerpo de la Tabla (tbody)
+  ============================== */
+  tbody {
+    display: table;
+    padding: 0 12px;
+
+    tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+      margin: 10px 0;
+      background: #ddd;
+
+      td {
+        padding: 10px;
+        text-align: left;
+        vertical-align: middle;
+
+        .edit-btn {
+          color: #444466;
+        }
+      }
+    }
+  }
+
+  thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+}
+
+/* ==============================
+  Contenedor Scrollable del tbody
+============================== */
+.table-body-container {
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: 2.5px solid #444466;
+  border-top: unset;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 5px 15px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #444466;
+    border-radius: 10px;
+
+    &:hover {
+      background: #2b2a3d;
+    }
+  }
+
+  .custom-table {
+    border-radius: unset;
+  }
+}
+
+/* ==============================
+  Ajustes de Columnas
+============================== */
+th:first-child,
+td:first-child,
+th:last-child,
+td:last-child {
+  text-align: center;
+  width: 50px;
+}
+
+/* ==============================
+  Estilos Específicos
+============================== */
+.student-photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.percent-absences {
+  background: #eee;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}

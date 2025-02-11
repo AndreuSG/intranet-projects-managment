@@ -1,0 +1,52 @@
+.dashboard {
+    margin: auto;
+  
+    .header {
+      display: flex;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(315px, 1fr));
+      gap: 40px;
+      margin: auto;
+    }
+  
+    .card {
+      background: #DCDCDC;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+  
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+      }
+  
+      h2 {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+  
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+  
+      button {
+        background: #444466;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+  
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  

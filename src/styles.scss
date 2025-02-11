@@ -1,0 +1,46 @@
+html, body { height: 100%; }
+body {
+    margin: 0;
+    padding: 3% 5%;
+    font-family: "Poppins", Roboto, "Helvetica Neue", sans-serif;
+    h1 {
+        text-align: left;
+        font-size: 32px;
+        font-weight: normal;
+        color: #444466;
+    }
+    h2 {
+        text-align: left;
+        font-size: 18px;
+        font-weight: bold;
+        color: #444466;
+    }
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .page-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.page-subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  shared-search-bar {
+    width: 50%;
+  }
+
+  .extra-actions {
+    display: flex;
+    gap: 20px;
+  }
+}

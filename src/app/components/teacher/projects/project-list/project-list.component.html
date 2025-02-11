@@ -1,0 +1,21 @@
+<div class="project-list">
+  <div class="grid">
+    <div class="card" *ngFor="let project of filteredProjects"> <!--[routerLink]="'/project/' + project.id"-->
+      <div class="card-header">
+        <span class="category">{{ project.category }}</span>
+      </div>
+      <div class="card-body">
+        <h2>{{ project.title }}</h2>
+        <p class="creator">Creat per: <strong>{{ project.creator }}</strong></p>
+      </div>
+      <div class="card-footer">
+        <mat-icon class="icon">arrow_forward</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-results" *ngIf="filteredProjects.length === 0">
+    No s'han trobat projectes
+  </div>
+</div>
+

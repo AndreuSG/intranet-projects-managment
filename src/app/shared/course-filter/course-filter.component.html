@@ -1,0 +1,9 @@
+<div [matMenuTriggerFor]="filterMenu">
+  <shared-button [text]="selectedCourse" icon="filter_alt" [matMenuTriggerFor]="filterMenu"></shared-button>
+</div>
+
+<mat-menu #filterMenu="matMenu" class="course-menu">
+  <button mat-menu-item *ngFor="let course of courses" (click)="courseFilter(course)" class="course-menu-item">
+    {{ course }}
+  </button>
+</mat-menu>
