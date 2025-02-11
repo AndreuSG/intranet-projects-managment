@@ -1,25 +1,29 @@
 <h1 mat-dialog-title>Crear Proyecto</h1>
 <div mat-dialog-content>
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Título</mat-label>
+  <mat-form-field>
+    <mat-label>Titol</mat-label>
     <input matInput [formControl]="titleControl">
-    <mat-error *ngIf="titleControl.invalid">El título es obligatorio</mat-error>
+    <mat-error *ngIf="titleControl.invalid">El titol es obligatori</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Categoría</mat-label>
-    <input matInput [formControl]="categoryControl">
-    <mat-error *ngIf="categoryControl.invalid">La categoría es obligatoria</mat-error>
+  <mat-form-field>
+    <mat-label>Grup</mat-label>
+    <mat-select [formControl]="categoryControl">
+      <mat-option *ngFor="let course of validCourses" [value]="course">
+        {{ course }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="categoryControl.invalid">La categoria es obligatoria</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="full-width">
+  <mat-form-field>
     <mat-label>Creador</mat-label>
     <input matInput [formControl]="creatorControl">
-    <mat-error *ngIf="creatorControl.invalid">El creador es obligatorio</mat-error>
+    <mat-error *ngIf="creatorControl.invalid">El creador es obligatori</mat-error>
   </mat-form-field>
 </div>
 
-<div mat-dialog-actions align="end">
+<div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancelar</button>
   <button mat-button color="primary" (click)="onSubmit()" [disabled]="titleControl.invalid || categoryControl.invalid || creatorControl.invalid">
     Guardar
