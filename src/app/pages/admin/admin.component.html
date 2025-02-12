@@ -4,7 +4,7 @@
     <back-button></back-button>
   </div>
 
-  <shared-button text="Afegir" icon="person_add" (click)="addStudent()"></shared-button>
+  <shared-button text="Selecció de moduls de projecte" icon="view_module" (click)="addStudent()"></shared-button>
 </div>
 
 <div class="page-subheader">
@@ -12,7 +12,7 @@
 
   <div class="extra-actions">
     <shared-button [text]="filterText" icon="filter_alt"></shared-button>
-    <shared-button text="Donar de baixa" icon="delete" (click)="deleteStudents()" type="danger"></shared-button>
+    <shared-button text="Donar de baixa" icon="person_remove" (click)="deleteStudents()" type="danger"></shared-button>
   </div>
 </div>
 

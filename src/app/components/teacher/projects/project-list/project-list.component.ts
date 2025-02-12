@@ -34,7 +34,7 @@ export class ProjectListComponent {
     { id: 9, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" }
   ];
 
-  filteredProjects = [...this.projects];
+  filteredProjects: Project[] = [];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['search'] || changes['selectedCourse']) {

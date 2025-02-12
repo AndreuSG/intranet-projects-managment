@@ -23,38 +23,7 @@ import { Course } from '../../models/enums/course.enum';
 export class AdminComponent {
   filterText: string = 'Tots els cursos';
 
-  students: Student[] = [
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-  ];
+  students: Student[] = [];
 
   addStudent() {
     console.log('Agregar estudiante');

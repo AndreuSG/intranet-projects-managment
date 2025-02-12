@@ -1,1 +1,11 @@
-<p>project-detail works!</p>
+<div *ngIf="isLoading">Carregant...</div>
+<div *ngIf="!isLoading && project">
+  <h2>{{ project.title }}</h2>
+  <p>{{ project.description }}</p>
+  <p><strong>Fecha de inicio:</strong> {{ project.startDate }}</p>
+  <p><strong>Fecha de fin:</strong> {{ project.endDate }}</p>
+</div>
+<div *ngIf="!isLoading && !project">
+  <p>No s'ha trobat el projecte.</p>
+  <shared-button text="Tornar a la llista de projectes" (click)="returnToList()"></shared-button>
+</div>

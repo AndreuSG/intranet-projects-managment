@@ -12,7 +12,7 @@ export interface ProjectDetail extends Project {
   description: string;
   creationDate: Date;
   lastUpdated: Date | null;
-  beginDate: Date;
+  startDate: Date;
   endDate: Date;
   attachments: Attachment[];
 }
