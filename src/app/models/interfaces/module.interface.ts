@@ -1,5 +1,7 @@
 export interface Module {
   id: number;
-  name: string;
+  curr: string;
   study: string;
+  acronym: string;
+  name: string;
 }

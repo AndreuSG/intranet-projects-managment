@@ -6,6 +6,7 @@ import { SearchBarComponent } from "../../shared/components/search-bar/search-ba
 import { TableComponent } from "../../shared/components/table/table.component";
 import { Student } from '../../models/interfaces/student.interface';
 import { Course } from '../../models/enums/course.enum';
+import { ModuleSelectorComponent } from "../../components/admin/module-selector/module-selector.component";
 
 @Component({
   standalone: true,
@@ -15,7 +16,8 @@ import { Course } from '../../models/enums/course.enum';
     BackButtonComponent,
     ButtonComponent,
     SearchBarComponent,
-    TableComponent
+    TableComponent,
+    ModuleSelectorComponent
 ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'

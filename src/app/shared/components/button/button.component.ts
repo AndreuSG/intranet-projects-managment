@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CustomIcons } from './custom-icons';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'shared-button',
@@ -11,6 +12,7 @@ import { CustomIcons } from './custom-icons';
     MatButtonModule,
     MatIconModule,
     CommonModule,
+    ButtonModule,
   ],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'

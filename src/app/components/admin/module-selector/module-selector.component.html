@@ -1,1 +1,37 @@
-<p>module-selector works!</p>
+<p-button (click)="op.toggle($event)" icon="pi pi-th-large" label="Selecció de moduls de projecte" />
+<p-popover #op>
+  <p-table #dt1
+    [value]="modules"
+    selectionMode="multiple"
+    [(selection)]="selectedModules"
+    [metaKeySelection]="false"
+    dataKey="id"
+    [tableStyle]="{'min-width': '35rem'}"
+    [scrollable]="true"
+    scrollHeight="400px"
+  >
+    <ng-template #caption>
+      Estudi
+      <p-select
+        [options]="courses"
+        [(ngModel)]="selectedCourse"
+        [checkmark]="true"
+        [showClear]="true"
+        optionLabel="name"
+        placeholder="Selecciona un estudi"
+      />
+    </ng-template>
+    <ng-template #header>
+        <tr>
+          <th style="width: 3.5rem;">Estudi</th>
+          <th>Nom</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-module>
+        <tr>
+          <td>{{module.nom_estudis}}</td>
+          <td>{{module.nom_modul}}</td>
+        </tr>
+    </ng-template>
+  </p-table>
+</p-popover>

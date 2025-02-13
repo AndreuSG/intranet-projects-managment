@@ -1,5 +1,5 @@
 <div [matMenuTriggerFor]="filterMenu">
-  <shared-button [text]="selectedCourse" icon="filter_alt" [matMenuTriggerFor]="filterMenu"></shared-button>
+  <shared-button [text]="selectedCourse" [icon]="selectedCourse === defaultCourse ? 'filter' : 'filter-fill'" [matMenuTriggerFor]="filterMenu"></shared-button>
 </div>
 
 <mat-menu #filterMenu="matMenu" class="course-menu">

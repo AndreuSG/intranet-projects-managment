@@ -33,8 +33,8 @@ export class ProjectDetailComponent implements OnInit {
 
   loadProject(id: number) {
     this.projectService.findById(id).subscribe({
-      next: (response) => {
-        this.project = response.data;
+      next: (project) => {
+        this.project = project;
         this.isLoading = false;
       },
       error: (err) => {
