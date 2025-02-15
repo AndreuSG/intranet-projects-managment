@@ -11,4 +11,8 @@ export class ModuleService extends ApiService {
   findAll(): Observable<Module[]> {
     return this.get(API_URLS.MODULES).pipe(map(res => res as Module[]));
   }
+
+  confirmModules(modules: Module[]): Observable<Module[]> {
+    return this.post(API_URLS.CONFIRM_MODULES, modules).pipe(map(res => res as Module[]));
+  }
 }

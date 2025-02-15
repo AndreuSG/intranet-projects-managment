@@ -18,7 +18,7 @@ export class CourseFilterComponent {
   @Output()
   courseSelected = new EventEmitter<string>();
 
-  defaultCourse: string = 'Tots els cursos';
+  defaultCourse: string = 'Tots els estudis';
   selectedCourse: string = this.defaultCourse;
 
   courses = [this.selectedCourse, ...Object.values(Course)];

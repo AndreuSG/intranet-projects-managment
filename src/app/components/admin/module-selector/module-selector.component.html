@@ -1,36 +1,51 @@
 <p-button (click)="op.toggle($event)" icon="pi pi-th-large" label="Selecció de moduls de projecte" />
 <p-popover #op>
+  <ng-template #closeicon>
+    <button pButton type="button" icon="pi pi-times" (click)="op.hide()"></button>
+  </ng-template>
   <p-table #dt1
     [value]="modules"
     selectionMode="multiple"
     [(selection)]="selectedModules"
     [metaKeySelection]="false"
-    dataKey="id"
+    dataKey="nom"
     [tableStyle]="{'min-width': '35rem'}"
     [scrollable]="true"
     scrollHeight="400px"
   >
     <ng-template #caption>
-      Estudi
-      <p-select
-        [options]="courses"
-        [(ngModel)]="selectedCourse"
-        [checkmark]="true"
-        [showClear]="true"
-        optionLabel="name"
-        placeholder="Selecciona un estudi"
-      />
+      <div class="modules-table-header">
+        <p-select
+          (onChange)="dt1.filter($event.value?.estudis, 'estudis', 'contains')"
+          [options]="studies"
+          [(ngModel)]="selectedCourse"
+          [checkmark]="true"
+          [showClear]="true"
+          optionLabel="estudis"
+          placeholder="Selecciona un estudi"
+        />
+        <p-button 
+          (click)="confirmModules()"
+          label="Confirmar" 
+          severity="success" 
+          icon="pi pi-check" 
+          [disabled]="!isValidSelection()"
+          pTooltip="Selecciona 1 modul de cada estudi"
+          tooltipPosition="bottom"
+          [tooltipDisabled]="isValidSelection()"
+        />  
+      </div>
     </ng-template>
     <ng-template #header>
         <tr>
-          <th style="width: 3.5rem;">Estudi</th>
+          <th style="width: 3.5rem;">Estudis</th>
           <th>Nom</th>
         </tr>
     </ng-template>
-    <ng-template #body let-module>
-        <tr>
-          <td>{{module.nom_estudis}}</td>
-          <td>{{module.nom_modul}}</td>
+    <ng-template #body let-module let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="module" [pSelectableRowIndex]="rowIndex">
+          <td>{{module.estudis}}</td>
+          <td>{{module.nom}}</td>
         </tr>
     </ng-template>
   </p-table>

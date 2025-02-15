@@ -1,28 +1,43 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TableModule } from 'primeng/table';
+import { Student } from '../../../models/interfaces/student.interface';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'shared-table',
   imports: [
     CommonModule,
-    MatIconModule,
-    MatButtonModule,
+    TableModule,
   ],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
-  @Input() data: any[] = [];
-  @Input() type: 'admin' | 'attendance' = 'admin';
+  @Input() 
+  students: Student[] = [];
 
-  getColumns(): string[] {
+  @Input({required: true}) 
+  type!: 'admin' | 'attendance';
+
+  @Output()
+  changeStudentsSelected: EventEmitter<Student[]> = new EventEmitter<Student[]>();
+
+  selectedStudents: Student[] = [];
+
+  getColumns(): {field: string, header: string }[] {
     if (this.type === 'admin') {
-      return ['select', 'name', 'course', 'email', 'edit'];
-    } else if (this.type === 'attendance') {
-      return ['attendance', 'absence', 'delay', 'photo', 'student', 'percentAbsences', 'report'];
+      return [
+        { field: 'idalu', header: 'IDALU' },
+        { field: 'nom_complet', header: 'Nom complet' },
+        { field: 'email', header: 'Email' },
+      ];
     }
-    return Object.keys(this.data[0] || {});
+
+    return [];
+  }
+
+  onSelectionChange() {
+    this.changeStudentsSelected.emit(this.selectedStudents);
   }
 }

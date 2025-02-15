@@ -8,6 +8,7 @@ import { ModuleService } from '../../../api/module/module.service';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Select } from 'primeng/select';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-module-selector',
@@ -18,7 +19,8 @@ import { Select } from 'primeng/select';
     FormsModule,
     IconFieldModule,
     InputIconModule,
-    Select
+    Select,
+    TooltipModule
   ],
   templateUrl: './module-selector.component.html',
   styleUrl: './module-selector.component.scss'
@@ -27,28 +29,38 @@ export class ModuleSelectorComponent implements OnInit {
 
   @ViewChild('dt1') dt1!: Table;
 
-  modules!: Module[];
-  courses = [
-    { name: 'DAM' },
-    { name: 'DAW' },
-    { name: 'ASIX' },
-    { name: 'SMX' },
+  modules: Module[] = [
+    { curriculum: 'C24', nom: 'Sistemes Informatics', sigles: 'SI', estudis: 'ASIX'},
+    { curriculum: 'C24', nom: 'Sistemes Informatics Dinamics', sigles: 'SID', estudis: 'DAW'},
+    { curriculum: 'C24', nom: 'Sistemes', sigles: 'S', estudis: 'SMX'},
   ];
 
-  selectedModules!: Module;
+  studies = [...new Set(this.modules.map(m => m.estudis))].map(estudis => ({ estudis }));
+
+  selectedModules!: Module[];
   selectedCourse: string | undefined;
 
   constructor(private moduleService: ModuleService) {}
 
   ngOnInit(): void {
     this.moduleService.findAll().subscribe(data => {
-      console.log(data);
       this.modules = data;
     });
   }
 
-  onFilterGlobal(event: Event) {
-    const inputValue = (event.target as HTMLInputElement).value;
-    this.dt1.filterGlobal(inputValue, 'contains');
+  confirmModules(): void {
+    console.log(this.selectedModules);
+    this.moduleService.confirmModules(this.selectedModules).subscribe(data => {
+      this.modules = data;
+    });
+  }
+
+  isValidSelection(): boolean {
+    if (!this.selectedModules || this.selectedModules.length === 0) return false;
+  
+    const selectedStudies = new Set(this.selectedModules.map(m => m.estudis));
+    const allStudies = new Set(this.modules.map(m => m.estudis));
+  
+    return selectedStudies.size === allStudies.size;
   }
 }

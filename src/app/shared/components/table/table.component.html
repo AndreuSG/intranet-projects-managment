@@ -1,60 +1,29 @@
-<div class="table-container">
-  <table class="custom-table">
-    <thead>
-      <tr>
-        <ng-container *ngIf="type === 'admin'; else attendanceHeader">
-          <th><input type="checkbox" /></th>
-          <th>Nom complet</th>
-          <th>Curs</th>
-          <th>Email</th>
-          <th>Editar</th>
-        </ng-container>
-        <ng-template #attendanceHeader>
-          <th>Assistència</th>
-          <th>Falta</th>
-          <th>Retard</th>
-          <th>Foto</th>
-          <th>Nom de l'alumne</th>
-          <th>% Faltes</th>
-          <th>Enllaç a informe</th>
-        </ng-template>
-      </tr>
-    </thead>
-  </table>
-
-  <div class="table-body-container">
-    <table class="custom-table">
-      <tbody>
-        <ng-container *ngIf="type === 'admin'; else attendanceRow">
-          <ng-container *ngFor="let row of data">
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>{{ row.name }}</td>
-              <td>{{ row.course }}</td>
-              <td>{{ row.email }}</td>
-              <td>
-                <button mat-icon-button aria-label="Editar alumne" >
-                  <mat-icon class="edit-btn">edit_square</mat-icon>
-                </button>
-              </td>
-            </tr>
-          </ng-container>
-        </ng-container>
-
-        <ng-template #attendanceRow>
-          <tr *ngFor="let row of data">
-            <td><input type="radio" /></td>
-            <td><input type="radio" /></td>
-            <td><input type="radio" /></td>
-            <td><img [src]="row.photo" alt="Foto Alumne" class="student-photo" /></td>
-            <td>{{ row.student }}</td>
-            <td><span class="percent-absences">{{ row.percentAbsences }}</span></td>
-            <td>
-              <button class="edit-btn">🔗</button>
-            </td>
-          </tr>
-        </ng-template>
-      </tbody>
-    </table>
-  </div>
-</div>
+<p-table 
+  [columns]="getColumns()" 
+  [(selection)]="selectedStudents" 
+  [value]="students" 
+  [tableStyle]="{ 'min-width': '50rem' }" 
+  (selectionChange)="onSelectionChange()"
+  >
+  <ng-template #header let-columns>
+    <tr>
+      <th *ngIf="type === 'admin'" style="width: 4rem"><p-tableHeaderCheckbox /></th>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-rowData let-columns="columns">
+    <tr>
+      <td *ngIf="type === 'admin'"><p-tableCheckbox [value]="rowData"></p-tableCheckbox></td>
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #emptymessage let-columns>
+    <tr>
+        <td [colSpan]="columns.length">No s'han trobat alumnes.</td>
+    </tr>
+</ng-template>
+</p-table>
