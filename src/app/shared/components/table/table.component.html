@@ -1,4 +1,5 @@
 <p-table 
+  [loading]="loading"
   [columns]="getColumns()" 
   [(selection)]="selectedStudents" 
   [value]="students" 
@@ -23,7 +24,7 @@
   </ng-template>
   <ng-template #emptymessage let-columns>
     <tr>
-        <td [colSpan]="columns.length">No s'han trobat alumnes.</td>
+        <td [colSpan]="columns.length + 1">No s'han trobat alumnes.</td>
     </tr>
 </ng-template>
 </p-table>

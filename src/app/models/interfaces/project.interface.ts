@@ -1,10 +1,10 @@
-import { Course } from "../enums/course.enum";
+import { Studies } from "../enums/studies.enum";
 import { Attachment } from "./attachment.interface";
 
 export interface Project {
   id: number | null;
   title: string;
-  category: Course;
+  category: Studies;
   creator: string;
 }
 

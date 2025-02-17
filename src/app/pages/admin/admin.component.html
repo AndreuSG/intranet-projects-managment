@@ -17,5 +17,5 @@
 </div>
 
 <div class="page-content">
-  <shared-table [students]="filteredStudents" (changeStudentsSelected)="selectedStudents = $event" type="admin"></shared-table>
+  <shared-table [loading]="loading" [students]="filteredStudents" (changeStudentsSelected)="selectedStudents = $event" type="admin"></shared-table>
 </div>

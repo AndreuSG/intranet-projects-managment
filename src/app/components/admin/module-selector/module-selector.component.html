@@ -4,6 +4,7 @@
     <button pButton type="button" icon="pi pi-times" (click)="op.hide()"></button>
   </ng-template>
   <p-table #dt1
+    [loading]="loading"
     [value]="modules"
     selectionMode="multiple"
     [(selection)]="selectedModules"
@@ -24,13 +25,24 @@
           optionLabel="estudis"
           placeholder="Selecciona un estudi"
         />
+        <p-iconfield iconPosition="left" class="ml-auto">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input
+            pInputText
+            type="text"
+            (input)="onFilterName($event)"
+            placeholder="Busca moduls"
+          />
+        </p-iconfield>
         <p-button 
           (click)="confirmModules()"
           label="Confirmar" 
           severity="success" 
           icon="pi pi-check" 
           [disabled]="!isValidSelection()"
-          pTooltip="Selecciona 1 modul de cada estudi"
+          pTooltip="Selecciona com a máxim 1 modul de cada estudi"
           tooltipPosition="bottom"
           [tooltipDisabled]="isValidSelection()"
         />  
@@ -38,12 +50,14 @@
     </ng-template>
     <ng-template #header>
         <tr>
+          <th style="width: 3rem;">Curriculum</th>
           <th style="width: 3.5rem;">Estudis</th>
           <th>Nom</th>
         </tr>
     </ng-template>
     <ng-template #body let-module let-rowIndex="rowIndex">
         <tr [pSelectableRow]="module" [pSelectableRowIndex]="rowIndex">
+          <td>{{module.curriculum}}</td>
           <td>{{module.estudis}}</td>
           <td>{{module.nom}}</td>
         </tr>

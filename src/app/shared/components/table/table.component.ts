@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { Student } from '../../../models/interfaces/student.interface';
-import { Button } from 'primeng/button';
 
 @Component({
   selector: 'shared-table',
@@ -19,6 +18,9 @@ export class TableComponent {
 
   @Input({required: true}) 
   type!: 'admin' | 'attendance';
+
+  @Input({required: true})
+  loading!: boolean;
 
   @Output()
   changeStudentsSelected: EventEmitter<Student[]> = new EventEmitter<Student[]>();

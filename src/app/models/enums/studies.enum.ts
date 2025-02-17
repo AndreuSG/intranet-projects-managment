@@ -1,4 +1,4 @@
-export enum Course {
+export enum Studies {
   daw = 'DAW',
   asix = 'ASIX',
   smx = 'SMX',

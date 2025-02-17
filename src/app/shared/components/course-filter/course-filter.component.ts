@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { ButtonComponent } from "../button/button.component";
 import { CommonModule } from '@angular/common';
-import { Course } from '../../../models/enums/course.enum';
+import { Studies } from '../../../models/enums/studies.enum';
 
 @Component({
   selector: 'shared-course-filter',
@@ -21,7 +21,7 @@ export class CourseFilterComponent {
   defaultCourse: string = 'Tots els estudis';
   selectedCourse: string = this.defaultCourse;
 
-  courses = [this.selectedCourse, ...Object.values(Course)];
+  courses = [this.selectedCourse, ...Object.values(Studies)];
 
   courseFilter(course: string) {
     this.selectedCourse = course;

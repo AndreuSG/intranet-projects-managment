@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { BackButtonComponent } from "../../shared/components/back-button/back-button.component";
 import { SearchBarComponent } from "../../shared/components/search-bar/search-bar.component";
 import { TableComponent } from "../../shared/components/table/table.component";
 import { Button } from "primeng/button";
 import { Student } from '../../models/interfaces/student.interface';
-import { Course } from '../../models/enums/course.enum';
+import { Studies } from '../../models/enums/studies.enum';
 import { ModuleSelectorComponent } from "../../components/admin/module-selector/module-selector.component";
 import { CourseFilterComponent } from "../../shared/components/course-filter/course-filter.component";
 import { StudentService } from '../../api/student/student.service';
@@ -25,32 +25,30 @@ import { StudentService } from '../../api/student/student.service';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
-export class AdminComponent {
-  students: Student[] = [
-    { idalu: 178945614, nom_complet: 'Joan Garcia', email: 'jgarcia@sapalomera.cat', studies: 'DAW' },
-    { idalu: 285962544, nom_complet: 'Joan Garcia', email: 'jgarcia@sapalomera.cat', studies: 'DAW' },
-    { idalu: 358714856, nom_complet: 'Joan Garcia', email: 'jgarcia@sapalomera.cat', studies: 'ASIX' },
-    { idalu: 454861461, nom_complet: 'Joan Garcia', email: 'jgarcia@sapalomera.cat', studies: 'SMX' },
-  ];
-
+export class AdminComponent implements OnInit {
+  students: Student[] = [];
   filteredStudents: Student[] = [...this.students];
-
   selectedStudents: Student[] = [];
 
   searchQuery: string = '';
   selectedStudy: string = '';
 
-  constructor(private studentService: StudentService) {
+  loading: boolean = true;
+
+  constructor(private studentService: StudentService) {}
+
+  ngOnInit(): void {
     this.studentService.findAll().subscribe(students => {
       this.students = students;
       this.filteredStudents = [...students];
+      this.loading = false;
     });
   }
 
   unenrollStudents() {
     this.studentService.unenrollStudents(this.selectedStudents.map(student => student.idalu)).subscribe(() => {
       this.students = this.students.filter(student => !this.selectedStudents.includes(student));
-      this.filteredStudents = this.filteredStudents.filter(student => !this.selectedStudents.includes(student));
+      this.filteredStudents = [...this.students];
       this.selectedStudents = [];
     });
   }

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Course } from '../../../../models/enums/course.enum';
+import { Studies } from '../../../../models/enums/studies.enum';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
@@ -28,7 +28,7 @@ export class ProjectFormComponent {
   categoryControl: FormControl;
   creatorControl: FormControl;
 
-  validCourses = Object.values(Course);
+  validCourses = Object.values(Studies);
 
   constructor(
     public dialogRef: MatDialogRef<ProjectFormComponent>,
