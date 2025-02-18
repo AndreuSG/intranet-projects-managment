@@ -1,9 +1,4 @@
-<div class="search-container">
-  <mat-icon>search</mat-icon>
-  <input
-    type="text"
-    [placeholder]="placeholder"
-    [formControl]="searchControl"
-    class="search-input"
-  />
-</div>
+<p-iconfield>
+  <p-inputicon styleClass="pi pi-search" />
+  <input type="text" pInputText [placeholder]="placeholder" [(ngModel)]="searchControl.value" pSize="large"/>
+</p-iconfield>

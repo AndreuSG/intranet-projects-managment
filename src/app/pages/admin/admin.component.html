@@ -12,7 +12,7 @@
 
   <div class="extra-actions">
     <shared-course-filter (courseSelected)="onFilter($event)"></shared-course-filter>
-    <p-button label="Donar de baixa" icon="pi pi-user-minus" (click)="unenrollStudents()" severity="danger" [disabled]="selectedStudents.length === 0"></p-button>
+    <p-button label="Donar de baixa" icon="pi pi-user-minus" (click)="unenrollStudents()" severity="danger" [disabled]="selectedStudents.length === 0" class="button"></p-button>
   </div>
 </div>
 

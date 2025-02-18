@@ -1,6 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { IconFieldModule } from 'primeng/iconfield';
+
+import { InputIconModule } from 'primeng/inputicon';
+import { InputText } from 'primeng/inputtext';
 import { debounceTime } from 'rxjs';
 
 @Component({
@@ -8,6 +13,10 @@ import { debounceTime } from 'rxjs';
   imports: [
     MatIconModule,
     ReactiveFormsModule,
+    IconFieldModule,
+    InputIconModule,
+    InputText,
+    FormsModule,
   ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'

@@ -1,13 +1,13 @@
 @import "primeicons/primeicons.css";
 
 :root {
-  --p-button-primary-background: #444466 !important;
-  --p-button-primary-border-color: #444466 !important;
-  --p-button-primary-hover-background: #34344f !important;
-  --p-button-primary-hover-border-color: #34344f !important;
-  --p-button-primary-active-background: #2d2d42 !important;
-  --p-button-primary-active-border-color: #2d2d42 !important;
-  --p-button-primary-focus-ring-color: #444466 !important;
+  --p-button-primary-background: #6c6c99 !important;
+  --p-button-primary-border-color: #6c6c99 !important;
+  --p-button-primary-hover-background: #5c5c85 !important;
+  --p-button-primary-hover-border-color: #5c5c85 !important;
+  --p-button-primary-active-background: #52527a !important;
+  --p-button-primary-active-border-color: #52527a !important;
+  --p-button-primary-focus-ring-color: #6c6c99 !important;
   --p-button-secondary-background: #DCDCDC !important;
   --p-button-secondary-border-color: #DCDCDC !important;
   --p-button-secondary-hover-background: #e6e6e6 !important;
@@ -15,10 +15,28 @@
   --p-button-secondary-active-background: #d9d9d9 !important;
   --p-button-secondary-active-border-color:  #d9d9d9 !important;
   --p-button-secondary-focus-ring-color: #DCDCDC !important;
+  --p-inputtext-focus-border-color: #6c6c99 !important;
+  --p-select-focus-border-color: #6c6c99 !important;
+}
+
+.dark-mode {
+  --p-button-primary-color: #fff !important;
+  --p-button-primary-hover-color: #fff !important;
+  --p-button-primary-background: #444466 !important;
+  --p-button-primary-border-color: #444466 !important;
+  --p-button-primary-hover-background: #34344f !important;
+  --p-button-primary-hover-border-color: #34344f !important;
+  --p-button-primary-active-background: #2d2d42 !important;
+  --p-button-primary-active-border-color: #2d2d42 !important;
+  --p-button-primary-focus-ring-color: #444466 !important;
+  --p-button-secondary-color: #464646 !important;
+  --p-button-secondary-hover-color: #464646 !important;
+
 }
 
 html, body { height: 100%; }
 body {
+  background-color: var(--background-color);
   margin: 0;
   font-family: "Poppins", Roboto, "Helvetica Neue", sans-serif;
   h1 {
@@ -36,7 +54,7 @@ body {
 }
 
 main {
-  padding: 3% 5%;
+  padding: 4% 5%;
 }
 
 .page-header {
