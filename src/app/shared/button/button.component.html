@@ -1,5 +1,0 @@
-<button mat-fab extended [ngStyle]="{ 'background-color': getButtonColor(), 'color': type === 'secondary' ? '#444466' : 'white' }" (click)="onClick()">
-  <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
-  <mat-icon *ngIf="customIcon" [svgIcon]="customIcon"></mat-icon>
-  {{ text }}
-</button>

@@ -1,7 +1,8 @@
-import { Course } from "../enums/course.enum";
+import { Study } from "../enums/study.enum";
 
 export interface Student {
-  name: string;
-  course: Course;
+  idalu: string;
+  nom_complet: string;
   email: string;
+  estudis: Study;
 }

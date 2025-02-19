@@ -1,0 +1,31 @@
+<p-table 
+  [loading]="loading"
+  [columns]="getColumns()" 
+  [(selection)]="selectedStudents" 
+  [value]="students" 
+  [scrollable]="true"
+  [scrollHeight]="scrollHeight"
+  (selectionChange)="onSelectionChange()"
+  >
+  <ng-template #header let-columns>
+    <tr>
+      <th *ngIf="type === 'admin'" style="width: 4rem"><p-tableHeaderCheckbox /></th>
+      <th *ngFor="let col of columns" [ngStyle]="['estudis', 'idalu'].includes(col.field) ? {'width': '8rem'} : {}">
+        {{ col.header }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-rowData let-columns="columns">
+    <tr>
+      <td *ngIf="type === 'admin'"><p-tableCheckbox [value]="rowData"></p-tableCheckbox></td>
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #emptymessage let-columns>
+    <tr>
+        <td [colSpan]="columns.length + 1">No s'han trobat alumnes.</td>
+    </tr>
+</ng-template>
+</p-table>

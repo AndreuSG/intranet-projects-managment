@@ -2,13 +2,18 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { Project } from '../../../../models/interfaces/project.interface';
-import { Course } from '../../../../models/enums/course.enum';
+import { Study } from '../../../../models/enums/study.enum';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  imports: [CommonModule, MatIcon]
+  imports: [
+    CommonModule,
+    MatIcon,
+    RouterModule,
+  ]
 })
 export class ProjectListComponent {
   @Input()
@@ -18,18 +23,18 @@ export class ProjectListComponent {
   selectedCourse: string = '';
 
   projects: Project[] = [
-    { id: 1, category: Course.asix, title: "AWS amb Terraform", creator: "David Bancells" },
-    { id: 2, category: Course.daw, title: "CMS agència de viatges", creator: "Xavier Martín" },
-    { id: 3, category: Course.dvrv, title: "Crear un joc 3D amb Unity", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 4, category: Course.iabd, title: "Ni idea", creator: "Francesc Barragan" },
-    { id: 5, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 6, category: Course.asix, title: "AWS amb Terraform", creator: "David Bancells" },
-    { id: 7, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 8, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 9, category: Course.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" }
+    { id: 1, category: Study.asix, title: "AWS amb Terraform", creator: "David Bancells" },
+    { id: 2, category: Study.daw, title: "CMS agència de viatges", creator: "Xavier Martín" },
+    { id: 3, category: Study.dvrv, title: "Crear un joc 3D amb Unity", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 4, category: Study.iabd, title: "Ni idea", creator: "Francesc Barragan" },
+    { id: 5, category: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 6, category: Study.asix, title: "AWS amb Terraform", creator: "David Bancells" },
+    { id: 7, category: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 8, category: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
+    { id: 9, category: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" }
   ];
 
-  filteredProjects = [...this.projects];
+  filteredProjects: Project[] = [];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['search'] || changes['selectedCourse']) {

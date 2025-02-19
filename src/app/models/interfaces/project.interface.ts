@@ -1,10 +1,10 @@
-import { Course } from "../enums/course.enum";
+import { Study } from "../enums/study.enum";
 import { Attachment } from "./attachment.interface";
 
 export interface Project {
   id: number | null;
   title: string;
-  category: Course;
+  category: Study;
   creator: string;
 }
 
@@ -12,7 +12,7 @@ export interface ProjectDetail extends Project {
   description: string;
   creationDate: Date;
   lastUpdated: Date | null;
-  beginDate: Date;
+  startDate: Date;
   endDate: Date;
   attachments: Attachment[];
 }

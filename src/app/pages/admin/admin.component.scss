@@ -13,3 +13,12 @@
     gap: 20px;
   }
 }
+
+::ng-deep {
+  .p-button:disabled {
+    --p-button-danger-color: #615050;
+    --p-button-danger-background: #f0f0f0;
+    --p-button-danger-background: #f0f0f0;
+    --p-button-danger-border-color: #f0f0f0;
+  }
+}

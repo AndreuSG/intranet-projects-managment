@@ -4,18 +4,25 @@
     <back-button></back-button>
   </div>
 
-  <shared-button text="Afegir" icon="person_add" (click)="addStudent()"></shared-button>
+  <app-module-selector (onConfirm)="findStudents()"></app-module-selector>
 </div>
 
 <div class="page-subheader">
   <shared-search-bar placeholder="Cercar estudiants..." (search)="onSearch($event)"></shared-search-bar>
 
   <div class="extra-actions">
-    <shared-button [text]="filterText" icon="filter_alt"></shared-button>
-    <shared-button text="Donar de baixa" icon="delete" (click)="deleteStudents()" type="danger"></shared-button>
+    <shared-course-filter (courseSelected)="onFilter($event)"></shared-course-filter>
+    <p-button label="Donar de baixa" icon="pi pi-user-minus" (click)="unenrollStudents()" severity="danger" [disabled]="selectedStudents.length === 0" class="button"></p-button>
   </div>
 </div>
 
 <div class="page-content">
-  <shared-table [data]="students" type="admin"></shared-table>
+  <shared-table
+    [loading]="loading" 
+    [students]="filteredStudents" 
+    scrollHeight="65vh"
+    (changeStudentsSelected)="selectedStudents = $event" 
+    type="admin"
+    >
+  </shared-table>
 </div>

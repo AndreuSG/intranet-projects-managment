@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { BackButtonComponent } from "../../shared/back-button/back-button.component";
-import { ButtonComponent } from "../../shared/button/button.component";
-import { SearchBarComponent } from "../../shared/search-bar/search-bar.component";
-import { TableComponent } from "../../shared/table/table.component";
+import { BackButtonComponent } from "../../shared/components/back-button/back-button.component";
+import { SearchBarComponent } from "../../shared/components/search-bar/search-bar.component";
+import { TableComponent } from "../../shared/components/table/table.component";
+import { Button } from "primeng/button";
 import { Student } from '../../models/interfaces/student.interface';
-import { Course } from '../../models/enums/course.enum';
+import { Study } from '../../models/enums/study.enum';
+import { ModuleSelectorComponent } from "../../components/admin/module-selector/module-selector.component";
+import { CourseFilterComponent } from "../../shared/components/course-filter/course-filter.component";
+import { StudentService } from '../../api/student/student.service';
 
 @Component({
   standalone: true,
@@ -13,62 +16,74 @@ import { Course } from '../../models/enums/course.enum';
   imports: [
     MatIconModule,
     BackButtonComponent,
-    ButtonComponent,
+    Button,
     SearchBarComponent,
-    TableComponent
+    TableComponent,
+    ModuleSelectorComponent,
+    CourseFilterComponent
 ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
-export class AdminComponent {
-  filterText: string = 'Tots els cursos';
+export class AdminComponent implements OnInit {
+  students: Student[] = [];
+  filteredStudents: Student[] = [...this.students];
+  selectedStudents: Student[] = [];
 
-  students: Student[] = [
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-    { name: 'Andreu Sánchez Guerrero', course: Course.daw, email: 'asanchez11@sapalomera.cat' },
-  ];
+  searchQuery: string = '';
+  selectedStudy: string = '';
 
-  addStudent() {
-    console.log('Agregar estudiante');
+  loading!: boolean;
+
+  constructor(private studentService: StudentService) {}
+
+  ngOnInit(): void {
+    this.findStudents();
   }
 
-  filterStudents() {
-    console.log('Filtrar estudiantes');
+  findStudents() {
+    this.loading = true;
+
+    this.studentService.findAll().subscribe(students => {
+      console.log(students);
+      this.students = students;
+      this.filteredStudents = [...students];
+      this.loading = false;
+    });
   }
 
-  deleteStudents() {
-    console.log('Eliminar estudiantes');
+  unenrollStudents() {
+    this.studentService.unsubscribeStudents({ idalus: this.selectedStudents.map(student => student.idalu)}).subscribe(() => {
+      this.students = this.students.filter(student => !this.selectedStudents.includes(student));
+      this.filteredStudents = [...this.students];
+      this.selectedStudents = [];
+    });
   }
 
+  onFilter(value: string) {
+    this.selectedStudy = value;
+    this.applyFilters();
+  }
+
+  // Método de búsqueda
   onSearch(value: string) {
-    console.log('Texto de búsqueda:', value);
+    this.searchQuery = value.toLowerCase();
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.filteredStudents = this.students.filter(student => {
+      const matchesSearch = this.searchQuery
+      ? student.nom_complet.toLowerCase().includes(this.searchQuery) || 
+        student.email.toLowerCase().includes(this.searchQuery) || 
+        student.idalu.toString().includes(this.searchQuery)
+      : true;
+
+      const matchesCourse = (this.selectedStudy === 'Tots els estudis' || !this.selectedStudy) 
+      ? true 
+      : student.estudis === this.selectedStudy as Study;
+      
+      return matchesSearch && matchesCourse;
+    });
   }
 }

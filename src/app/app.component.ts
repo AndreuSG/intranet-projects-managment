@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ThemeSelectorComponent } from "./shared/theme-selector/theme-selector.component";
+import { ThemeSelectorComponent } from "./shared/components/theme-selector/theme-selector.component";
 
 @Component({
   selector: 'app-root',

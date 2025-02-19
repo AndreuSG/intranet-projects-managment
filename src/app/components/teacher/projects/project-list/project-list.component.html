@@ -1,6 +1,6 @@
 <div class="project-list">
   <div class="grid">
-    <div class="card" *ngFor="let project of filteredProjects"> <!--[routerLink]="'/project/' + project.id"-->
+    <div class="card" *ngFor="let project of filteredProjects" [routerLink]="['/projectes/' + project.id]">
       <div class="card-header">
         <span class="category">{{ project.category }}</span>
       </div>
