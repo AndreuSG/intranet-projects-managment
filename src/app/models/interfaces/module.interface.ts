@@ -1,10 +1,10 @@
-import { Studies } from "../enums/studies.enum";
+import { Study } from "../enums/study.enum";
 
 export interface Module {
   idmodul: number;
   idcurriculum: number;
   curriculum: string;
-  estudis: Studies;
+  estudis: Study;
   sigles: string;
   nom: string;
 }

@@ -4,7 +4,7 @@
     <back-button></back-button>
   </div>
 
-  <app-module-selector></app-module-selector>
+  <app-module-selector (onConfirm)="findStudents()"></app-module-selector>
 </div>
 
 <div class="page-subheader">
@@ -17,5 +17,12 @@
 </div>
 
 <div class="page-content">
-  <shared-table [loading]="loading" [students]="filteredStudents" (changeStudentsSelected)="selectedStudents = $event" type="admin"></shared-table>
+  <shared-table
+    [loading]="loading" 
+    [students]="filteredStudents" 
+    scrollHeight="65vh"
+    (changeStudentsSelected)="selectedStudents = $event" 
+    type="admin"
+    >
+  </shared-table>
 </div>

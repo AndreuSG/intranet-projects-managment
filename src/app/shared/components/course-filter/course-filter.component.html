@@ -1,9 +1,4 @@
-<div [matMenuTriggerFor]="filterMenu">
-  <shared-button [text]="selectedCourse" [icon]="selectedCourse === defaultCourse ? 'filter' : 'filter-fill'" [matMenuTriggerFor]="filterMenu"></shared-button>
+<div class="study-filter">
+  <p-menu #menu [model]="studies" [popup]="true" />
+  <p-button [label]="selectedStudy" [icon]="'pi pi-' + (selectedStudy === defaultStudy ? 'filter' : 'filter-fill')" (click)="menu.toggle($event)"></p-button>
 </div>
-
-<mat-menu #filterMenu="matMenu" class="course-menu">
-  <button mat-menu-item *ngFor="let course of courses" (click)="courseFilter(course)" class="course-menu-item">
-    {{ course }}
-  </button>
-</mat-menu>

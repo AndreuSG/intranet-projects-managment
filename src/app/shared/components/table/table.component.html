@@ -3,12 +3,14 @@
   [columns]="getColumns()" 
   [(selection)]="selectedStudents" 
   [value]="students" 
+  [scrollable]="true"
+  [scrollHeight]="scrollHeight"
   (selectionChange)="onSelectionChange()"
   >
   <ng-template #header let-columns>
     <tr>
       <th *ngIf="type === 'admin'" style="width: 4rem"><p-tableHeaderCheckbox /></th>
-      <th *ngFor="let col of columns">
+      <th *ngFor="let col of columns" [ngStyle]="['estudis', 'idalu'].includes(col.field) ? {'width': '8rem'} : {}">
         {{ col.header }}
       </th>
     </tr>

@@ -3,7 +3,6 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CustomIcons } from './custom-icons';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -25,39 +24,12 @@ export class ButtonComponent {
   icon?: string;
 
   @Input()
-  customIcon?: string;
-
-  @Input()
   type: 'primary' | 'secondary' | 'danger' | 'success' = 'primary';
 
   @Output()
-  click = new EventEmitter<void>();
+  click = new EventEmitter<MouseEvent>();
 
-  private iconRegistry = inject(MatIconRegistry);
-  private sanitizer = inject(DomSanitizer);
-
-  constructor() {
-    this.registerIcons();
-  }
-
-  private registerIcons() {
-    for (const icon of CustomIcons) {
-      this.iconRegistry.addSvgIconLiteral(icon.name, this.sanitizer.bypassSecurityTrustHtml(icon.svg));
-    }
-  }
-
-  private colorMap: { [key: string]: string } = {
-    primary: '#444466',
-    secondary: '#DCDCDC',
-    danger: '#9A0C0C',
-    success: '#28A745',
-  };
-
-  onClick() {
-    this.click.emit();
-  }
-
-  getButtonColor(): string {
-    return this.colorMap[this.type] || this.colorMap['primary'];
+  onClick(event: MouseEvent) {
+    this.click.emit(event);
   }
 }

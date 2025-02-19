@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { Popover } from 'primeng/popover';
 import { Table, TableModule } from 'primeng/table';
@@ -9,7 +9,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Select } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
-import { Studies } from '../../../models/enums/studies.enum';
+import { Study } from '../../../models/enums/study.enum';
 import { InputText } from 'primeng/inputtext';
 
 @Component({
@@ -31,9 +31,12 @@ import { InputText } from 'primeng/inputtext';
 export class ModuleSelectorComponent implements OnInit {
 
   @ViewChild('dt1') dt1!: Table;
+  @ViewChild('op') op!: Popover;
+
+  @Output() onConfirm = new EventEmitter<void>();
 
   modules: Module[] = [];
-  studies: { estudis: Studies}[] = [];
+  studies: { estudis: Study }[] = [];
 
   selectedModules!: Module[];
   selectedCourse: string | undefined;
@@ -44,25 +47,20 @@ export class ModuleSelectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.moduleService.findAll().subscribe(data => {
-      console.log('Modules', data);
       this.modules = data;
       this.studies = [...new Set(this.modules.map(m => m.estudis))].map(estudis => ({ estudis }));
       this.loading = false;
     });
 
     this.moduleService.findConfirmedModules().subscribe(data => {
-      console.log('Confirmed modules', data);
       this.selectedModules = this.modules.filter(m => data.some(sm => sm.idcurriculum === m.idcurriculum && sm.idmodul === m.idmodul));
-      console.log('Selected modules', this.selectedModules);
     });
   }
 
   confirmModules(): void {
-    console.log('Confirming modules', this.selectedModules);
-    this.moduleService.confirmModules(
-      this.selectedModules.map(({ idmodul, idcurriculum }) => ({ idmodul, idcurriculum }))
-    ).subscribe(data => {
-      console.log('Modules confirmed', data);
+    this.moduleService.confirmModules(this.selectedModules.map(({ idmodul, idcurriculum }) => ({ idmodul, idcurriculum }))).subscribe(() => {
+      this.op.hide();
+      this.onConfirm.emit();
     });
   }
 

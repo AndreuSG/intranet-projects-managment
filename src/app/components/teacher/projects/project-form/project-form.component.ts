@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Studies } from '../../../../models/enums/studies.enum';
+import { Study } from '../../../../models/enums/study.enum';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
@@ -28,7 +28,7 @@ export class ProjectFormComponent {
   categoryControl: FormControl;
   creatorControl: FormControl;
 
-  validCourses = Object.values(Studies);
+  validStudies = Object.values(Study);
 
   constructor(
     public dialogRef: MatDialogRef<ProjectFormComponent>,
@@ -40,7 +40,7 @@ export class ProjectFormComponent {
   }
 
   validCourseValidator(control: AbstractControl): ValidationErrors | null {
-    if (!this.validCourses.includes(control.value)) {
+    if (!this.validStudies.includes(control.value)) {
       return { invalidCourse: true };
     }
     return null;

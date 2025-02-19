@@ -1,4 +1,4 @@
-export enum Studies {
+export enum Study {
   daw = 'DAW',
   asix = 'ASIX',
   smx = 'SMX',

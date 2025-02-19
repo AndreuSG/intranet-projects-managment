@@ -5,7 +5,7 @@ import { SearchBarComponent } from "../../shared/components/search-bar/search-ba
 import { TableComponent } from "../../shared/components/table/table.component";
 import { Button } from "primeng/button";
 import { Student } from '../../models/interfaces/student.interface';
-import { Studies } from '../../models/enums/studies.enum';
+import { Study } from '../../models/enums/study.enum';
 import { ModuleSelectorComponent } from "../../components/admin/module-selector/module-selector.component";
 import { CourseFilterComponent } from "../../shared/components/course-filter/course-filter.component";
 import { StudentService } from '../../api/student/student.service';
@@ -33,12 +33,19 @@ export class AdminComponent implements OnInit {
   searchQuery: string = '';
   selectedStudy: string = '';
 
-  loading: boolean = true;
+  loading!: boolean;
 
   constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
+    this.findStudents();
+  }
+
+  findStudents() {
+    this.loading = true;
+
     this.studentService.findAll().subscribe(students => {
+      console.log(students);
       this.students = students;
       this.filteredStudents = [...students];
       this.loading = false;
@@ -46,7 +53,7 @@ export class AdminComponent implements OnInit {
   }
 
   unenrollStudents() {
-    this.studentService.unenrollStudents(this.selectedStudents.map(student => student.idalu)).subscribe(() => {
+    this.studentService.unsubscribeStudents({ idalus: this.selectedStudents.map(student => student.idalu)}).subscribe(() => {
       this.students = this.students.filter(student => !this.selectedStudents.includes(student));
       this.filteredStudents = [...this.students];
       this.selectedStudents = [];
@@ -74,7 +81,7 @@ export class AdminComponent implements OnInit {
 
       const matchesCourse = (this.selectedStudy === 'Tots els estudis' || !this.selectedStudy) 
       ? true 
-      : student.studies === this.selectedStudy;
+      : student.estudis === this.selectedStudy as Study;
       
       return matchesSearch && matchesCourse;
     });

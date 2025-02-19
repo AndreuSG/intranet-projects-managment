@@ -12,7 +12,7 @@ export class StudentService extends ApiService {
     return this.get(API_URLS.STUDENTS).pipe(map(res => res as Student[]));
   }
 
-  unenrollStudents(idalus: number[]) {
-    return this.post(API_URLS.UNENROLL_STUDENTS, idalus);
+  unsubscribeStudents(data: { idalus: string[] }) {
+    return this.put(API_URLS.UNSUBSCRIBE_STUDENTS, data);
   }
 }

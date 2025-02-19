@@ -22,14 +22,18 @@ export class TableComponent {
   @Input({required: true})
   loading!: boolean;
 
+  @Input()
+  scrollHeight: string = '100%';
+
   @Output()
   changeStudentsSelected: EventEmitter<Student[]> = new EventEmitter<Student[]>();
 
   selectedStudents: Student[] = [];
 
-  getColumns(): {field: string, header: string }[] {
+  getColumns(): { field: string, header: string }[] {
     if (this.type === 'admin') {
       return [
+        { field: 'estudis', header: 'Estudis' },
         { field: 'idalu', header: 'IDALU' },
         { field: 'nom_complet', header: 'Nom complet' },
         { field: 'email', header: 'Email' },

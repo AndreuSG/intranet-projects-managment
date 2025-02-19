@@ -1,7 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconFieldModule } from 'primeng/iconfield';
 
 import { InputIconModule } from 'primeng/inputicon';
@@ -11,7 +9,6 @@ import { debounceTime } from 'rxjs';
 @Component({
   selector: 'shared-search-bar',
   imports: [
-    MatIconModule,
     ReactiveFormsModule,
     IconFieldModule,
     InputIconModule,
@@ -28,13 +25,9 @@ export class SearchBarComponent {
   @Output()
   search = new EventEmitter<string>();
 
-  searchControl = new FormControl('');
+  searchQuery: string = '';
 
-  constructor() {
-    this.searchControl.valueChanges
-      .pipe(debounceTime(300))
-      .subscribe(value => {
-        this.search.emit(value || '');
-      });
+  onSearch(event: Event) {
+    this.search.emit(this.searchQuery);
   }
 }

@@ -9,7 +9,7 @@
   <mat-form-field>
     <mat-label>Grup</mat-label>
     <mat-select [formControl]="categoryControl">
-      <mat-option *ngFor="let course of validCourses" [value]="course">
+      <mat-option *ngFor="let course of validStudies" [value]="course">
         {{ course }}
       </mat-option>
     </mat-select>

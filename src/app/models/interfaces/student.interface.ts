@@ -1,6 +1,8 @@
+import { Study } from "../enums/study.enum";
+
 export interface Student {
-  idalu: number;
+  idalu: string;
   nom_complet: string;
   email: string;
-  studies: string;
+  estudis: Study;
 }

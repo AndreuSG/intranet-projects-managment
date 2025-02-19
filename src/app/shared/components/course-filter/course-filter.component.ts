@@ -1,15 +1,18 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
-import { ButtonComponent } from "../button/button.component";
 import { CommonModule } from '@angular/common';
-import { Studies } from '../../../models/enums/studies.enum';
+import { Study } from '../../../models/enums/study.enum';
+import { MenuItem } from 'primeng/api';
+import { Menu } from 'primeng/menu';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'shared-course-filter',
   imports: [
-    ButtonComponent,
+    Button,
     MatMenuModule,
     CommonModule,
+    Menu,
   ],
   templateUrl: './course-filter.component.html',
   styleUrl: './course-filter.component.scss'
@@ -18,13 +21,22 @@ export class CourseFilterComponent {
   @Output()
   courseSelected = new EventEmitter<string>();
 
-  defaultCourse: string = 'Tots els estudis';
-  selectedCourse: string = this.defaultCourse;
+  defaultStudy: string = 'Tots els estudis';
+  selectedStudy: string = this.defaultStudy;
 
-  courses = [this.selectedCourse, ...Object.values(Studies)];
+  studies: MenuItem[] = [this.selectedStudy, ...Object.values(Study)].map(item => {
+    if (item === this.defaultStudy) {
+      return { label: item, disabled: true, command: () => this.courseFilter(item) }
+    } 
+    return { label: item, command: () => this.courseFilter(item) }
+  });
 
-  courseFilter(course: string) {
-    this.selectedCourse = course;
-    this.courseSelected.emit(course);
+  courseFilter(study: string) {
+    this.selectedStudy = study;
+
+    this.studies.map(item => item.disabled = false);
+    this.studies.find(item => item.label === study)!.disabled = true;
+
+    this.courseSelected.emit(study);
   }
 }
