@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
 import { map, Observable } from 'rxjs';
 import { Project, ProjectDetail } from '../../models/interfaces/project.interface';
-import { API_URLS } from '../../shared/consts';
+import { API_URLS } from '../../shared/api-routes.const';
 
 @Injectable({
   providedIn: 'root'

@@ -8,8 +8,8 @@
   <shared-search-bar placeholder="Cercar projectes..." (search)="search=$event"></shared-search-bar>
 
   <div class="extra-actions">
-    <shared-course-filter (courseSelected)="onFilterSelected($event)"></shared-course-filter>
-    <shared-button text="Afegir projecte" icon="library_add" type="success" (click)="openDialog()"></shared-button>
+    <shared-course-filter (courseSelected)="this.selectedCourse = $event"></shared-course-filter>
+    <shared-button text="Afegir projecte" icon="plus" type="success" (click)="openProjectFormDialog()"></shared-button>
   </div>
 </div>
 

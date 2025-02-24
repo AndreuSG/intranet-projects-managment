@@ -1,17 +1,16 @@
-<div class="page-header">
-  <div class="page-title">
-    <h1>Portal del professor</h1>
-    <back-button></back-button>
+<div class="dashboard">
+  <div class="grid">
+    <p-card *ngFor="let item of dashboardItems">
+      <ng-template #header>
+        <div class="card-header">
+          <img [src]="item.image" alt="{{ item.title }}"> 
+        </div>
+      </ng-template>
+      <ng-template #title>{{ item.title }}</ng-template> 
+      <p>{{ item.description }}</p>
+      <ng-template #footer>
+        <p-button [routerLink]="item.link">{{ item.buttonText }}</p-button>
+      </ng-template>
+    </p-card>
   </div>
 </div>
-
-<div class="dashboard">
-    <div class="grid">
-      <div class="card" *ngFor="let item of dashboardItems">
-          <img [src]="item.image" alt="{{ item.title }}"> 
-          <h2>{{ item.title }}</h2>
-          <p>{{ item.description }}</p>
-          <button [routerLink]="item.link">{{ item.buttonText }}</button>
-      </div>
-  </div>
-  

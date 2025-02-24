@@ -2,9 +2,9 @@ import { Study } from "../enums/study.enum";
 import { Attachment } from "./attachment.interface";
 
 export interface Project {
-  id: number | null;
+  id?: number;
   title: string;
-  category: Study;
+  study: Study;
   creator: string;
 }
 
@@ -15,4 +15,8 @@ export interface ProjectDetail extends Project {
   startDate: Date;
   endDate: Date;
   attachments: Attachment[];
+}
+
+export interface SchoolProject extends Project {
+  createdBy: string;
 }

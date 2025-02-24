@@ -30,6 +30,7 @@ export class ButtonComponent {
   click = new EventEmitter<MouseEvent>();
 
   onClick(event: MouseEvent) {
+    event.stopPropagation();
     this.click.emit(event);
   }
 }

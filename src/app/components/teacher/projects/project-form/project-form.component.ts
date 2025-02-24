@@ -1,42 +1,28 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Study } from '../../../../models/enums/study.enum';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
-import { Project } from '../../../../models/interfaces/project.interface';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { Select } from 'primeng/select';
+import { ButtonComponent } from "../../../../shared/components/button/button.component";
 
 @Component({
   selector: 'project-form',
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    CommonModule,
-  ],
-  providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'} }
-  ],
+  imports: [ReactiveFormsModule, InputTextModule, FloatLabelModule, Select, ButtonComponent],
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.scss'
 })
 export class ProjectFormComponent {
-  titleControl: FormControl;
-  categoryControl: FormControl;
-  creatorControl: FormControl;
+  formGroup: FormGroup;
 
   validStudies = Object.values(Study);
 
-  constructor(
-    public dialogRef: MatDialogRef<ProjectFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Project
-  ) {
-    this.titleControl = new FormControl(this.data.title, Validators.required);
-    this.categoryControl = new FormControl(this.data.category, [Validators.required, this.validCourseValidator.bind(this)]);
-    this.creatorControl = new FormControl(this.data.creator, Validators.required);
+  constructor(private ref: DynamicDialogRef) {
+    this.formGroup = new FormGroup({
+      title: new FormControl<string | null>(null, [Validators.required]),
+      study: new FormControl<Study | null>(null , [Validators.required, this.validCourseValidator.bind(this)]),
+    });
   }
 
   validCourseValidator(control: AbstractControl): ValidationErrors | null {
@@ -46,17 +32,9 @@ export class ProjectFormComponent {
     return null;
   }
 
-  onSubmit() {
-    if (this.titleControl.valid && this.categoryControl.valid && this.creatorControl.valid) {
-      this.dialogRef.close({
-        title: this.titleControl.value,
-        category: this.categoryControl.value,
-        creator: this.creatorControl.value
-      });
+  saveProject(): void {
+    if (this.formGroup.valid) {
+      this.ref.close(this.formGroup.value);
     }
-  }
-
-  onCancel(): void {
-    this.dialogRef.close();
   }
 }

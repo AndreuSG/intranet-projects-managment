@@ -45,6 +45,6 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   returnToList() {
-    this.router.navigateByUrl('/projectes');
+    this.router.navigateByUrl('/teacher/projectes');
   }
 }
