@@ -11,12 +11,10 @@
       margin: auto;
     }
   
-    .card {
-      background: #DCDCDC;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
+    p-card {
+      .card-header	{
+        padding: 10px;
+      }
   
       img {
         width: 100%;
@@ -24,10 +22,10 @@
         border-radius: 20px;
       }
   
-      h2 {
-        font-size: 18px;
-        margin: 10px 0;
-      }
+      // h2 {
+      //   font-size: 18px;
+      //   margin: 10px 0;
+      // }
   
       p {
         font-size: 14px;

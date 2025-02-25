@@ -1,17 +1,17 @@
 <div class="project-list">
   <div class="grid">
-    <div class="card" *ngFor="let project of filteredProjects" [routerLink]="['/projectes/' + project.id]">
-      <div class="card-header">
-        <span class="category">{{ project.category }}</span>
-      </div>
+    <p-card *ngFor="let project of filteredProjects" (click)="navigateToProject(project.id!)" tabindex="0">
+        <div class="card-header">
+          <span class="category">{{ project.study }}</span>
+        </div>
       <div class="card-body">
         <h2>{{ project.title }}</h2>
         <p class="creator">Creat per: <strong>{{ project.creator }}</strong></p>
       </div>
       <div class="card-footer">
-        <mat-icon class="icon">arrow_forward</mat-icon>
+        <i class="pi pi-arrow-right"></i>
       </div>
-    </div>
+    </p-card>
   </div>
 
   <div class="no-results" *ngIf="filteredProjects.length === 0">

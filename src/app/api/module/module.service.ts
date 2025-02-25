@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Module, SelectedModule } from '../../models/interfaces/module.interface';
-import { API_URLS } from '../../shared/consts';
+import { API_URLS } from '../../shared/api-routes.const';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

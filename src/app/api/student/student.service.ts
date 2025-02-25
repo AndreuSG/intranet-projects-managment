@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
-import { API_URLS } from '../../shared/consts';
+import { API_URLS } from '../../shared/api-routes.const';
 import { map } from 'rxjs';
 import { Student } from '../../models/interfaces/student.interface';
 

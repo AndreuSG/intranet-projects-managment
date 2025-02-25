@@ -1,6 +1,6 @@
 .project-list {
-    padding: 20px;
-    margin: auto;
+    // padding: 20px;
+    // margin: auto;
 
     .grid {
         display: grid;
@@ -8,23 +8,22 @@
         gap: 24px;
     }
 
-    .card {
-        background: white;
+    p-card {
         border-radius: 12px;
-        padding: 20px;
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         border: 1px solid transparent;
 
-        &:hover {
+        &:hover,
+        &:focus {
             transform: translateY(-3px);
             box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
             border: 1px solid #6c63ff;
+
+            i {
+                transform: translateX(5px);
+            }
         }
 
         .card-header {
@@ -46,6 +45,7 @@
             flex-grow: 1;
 
             h2 {
+                color: var(--p-card-color);
                 font-size: 18px;
                 font-weight: bold;
                 margin: 10px 0;
@@ -64,14 +64,10 @@
             padding-top: 10px;
         }
 
-        .icon {
+        i {
             font-size: 24px;
             color: #6c63ff;
             transition: transform 0.2s;
-        }
-
-        &:hover .icon {
-            transform: translateX(5px);
         }
     }
 }

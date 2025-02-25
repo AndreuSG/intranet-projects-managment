@@ -1,0 +1,23 @@
+import { Routes } from "@angular/router";
+import { RoleGuard } from "../core/role.guard";
+
+export const TEACHER_ROUTES: Routes = [
+   {
+      path: '',
+      loadComponent: () => import('../pages/teacher/teacher.component').then(mod => mod.TeacherComponent),
+      canActivate: [RoleGuard],
+      data: { roles: ['profe'] }
+   },
+   {
+      path: 'projectes',
+      loadComponent: () => import('../pages/teacher/project/project.component').then(mod => mod.ProjectComponent),
+      canActivate: [RoleGuard],
+      data: { roles: ['profe'] }
+   },
+   { 
+      path: 'projectes/:id', 
+      loadComponent: () => import('../pages/teacher/project/project-detail/project-detail.component').then(mod => mod.ProjectDetailComponent),
+      canActivate: [RoleGuard],
+      data: { roles: ['profe'] }
+   },
+]

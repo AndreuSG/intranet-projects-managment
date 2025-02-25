@@ -1,0 +1,35 @@
+form {
+   .form-row {
+      display: flex;
+      gap: 1rem;
+
+      p-floatlabel {
+         margin-bottom: 1rem;
+         width: 100%;
+
+         &.field-30 {
+            flex: 0 0 30%;
+         }
+   
+         input {
+            width: 100%;
+         }
+
+         p-select {
+            width: 100%;
+         }
+
+         .error {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+         }
+      }
+   }
+
+   .form-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+   }
+}
