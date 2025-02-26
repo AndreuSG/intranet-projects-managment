@@ -25,14 +25,15 @@ export class ProjectDetailComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const projectId = params.get('id')!;
-      if (projectId) {
-        this.loadProject(parseInt(projectId));
+      const tab: 'school' | 'student' = params.get('tab')! as 'school' | 'student';
+      if (projectId && tab) {
+        this.loadProject(parseInt(projectId), tab);
       }
     });
   }
 
-  loadProject(id: number) {
-    this.projectService.findById(id).subscribe({
+  loadProject(id: number, tab: 'school' | 'student') {
+    this.projectService.findById(id, tab).subscribe({
       next: (project) => {
         this.project = project;
         this.isLoading = false;

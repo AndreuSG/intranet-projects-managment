@@ -1,12 +1,12 @@
-<div class="project-list">
+<div *ngIf="!isLoading; else loading" class="project-list">
   <div class="grid">
     <p-card *ngFor="let project of filteredProjects" (click)="navigateToProject(project.id!)" tabindex="0">
         <div class="card-header">
-          <span class="category">{{ project.study }}</span>
+          <span class="category">{{ project.estudi }}</span>
         </div>
       <div class="card-body">
-        <h2>{{ project.title }}</h2>
-        <p class="creator">Creat per: <strong>{{ project.creator }}</strong></p>
+        <h2>{{ project.titol }}</h2>
+        <p class="creator">Creat per: <strong>{{ project.creatPer }}</strong></p>
       </div>
       <div class="card-footer">
         <i class="pi pi-arrow-right"></i>
@@ -19,3 +19,8 @@
   </div>
 </div>
 
+<ng-template #loading>
+  <div class="loading-overlay">
+    <p-progress-spinner ariaLabel="loading" />
+  </div>
+</ng-template>

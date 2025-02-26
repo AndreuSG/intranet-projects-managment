@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { Study } from '../../../models/enums/study.enum';
@@ -21,21 +21,27 @@ export class CourseFilterComponent {
   @Output()
   courseSelected = new EventEmitter<string>();
 
+  @Input()
+  studies: Study[] = [];
+
   defaultStudy: string = 'Tots els estudis';
   selectedStudy: string = this.defaultStudy;
+  studiesList!: MenuItem[];
 
-  studies: MenuItem[] = [this.selectedStudy, ...Object.values(Study)].map(item => {
-    if (item === this.defaultStudy) {
-      return { label: item, disabled: true, command: () => this.courseFilter(item) }
-    } 
-    return { label: item, command: () => this.courseFilter(item) }
-  });
+  constructor() {
+    this.studiesList = [this.selectedStudy, ...this.studies].map(item => {
+      if (item === this.defaultStudy) {
+        return { label: item, disabled: true, command: () => this.courseFilter(item) }
+      } 
+      return { label: item, command: () => this.courseFilter(item) }
+    });
+  }
 
   courseFilter(study: string) {
     this.selectedStudy = study;
 
-    this.studies.map(item => item.disabled = false);
-    this.studies.find(item => item.label === study)!.disabled = true;
+    this.studiesList.map(item => item.disabled = false);
+    this.studiesList.find(item => item.label === study)!.disabled = true;
 
     this.courseSelected.emit(study);
   }

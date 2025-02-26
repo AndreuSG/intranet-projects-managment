@@ -22,4 +22,18 @@ export class AuthService {
     const payload: JwtPayload = jwtDecode(this.accessToken);
     return payload.admin ? 'admin' : payload.role;
   }
+
+  getUsername(): string {
+    if (!this.accessToken) return '';
+
+    const payload: JwtPayload = jwtDecode(this.accessToken);
+    return payload.username;
+  }
+
+  getId(): number {
+    if (!this.accessToken) return 0;
+
+    const payload: JwtPayload = jwtDecode(this.accessToken);
+    return payload.id;
+  }
 }

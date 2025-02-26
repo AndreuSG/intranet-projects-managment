@@ -7,6 +7,7 @@ import { ApiService } from './api/api.service';
 import { API_URLS } from './shared/api-routes.const';
 import { jwtDecode } from 'jwt-decode';
 import { JwtPayload } from './models/interfaces/jwt-payload.interface';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -25,18 +26,24 @@ export class AppComponent {
 
     const data = event.data;
     if (data && data.token) {
+      window.removeEventListener('message', this.intranetMessageListener);
       localStorage.setItem('localAuthToken', data.token);
       console.log('JWT recibido de la intranet:', data.token);
-      window.removeEventListener('message', this.intranetMessageListener);
+      this.validateToken(data.token);
     }
   };
 
   constructor(
     private oauthService: OAuthService,
+    private authService: AuthService,
     private apiService: ApiService,
     private ngZone: NgZone,
     private router: Router,
-  ) {}
+  ) {
+    if (localStorage.getItem('localAuthToken')) {
+      this.authService.setAccessToken(localStorage.getItem('localAuthToken')!);
+    }
+  }
 
   ngOnInit(): void {
     this.oauthService.configure({
@@ -61,32 +68,37 @@ export class AppComponent {
       if (this.oauthService.hasValidIdToken() && !localToken) {
         const googleToken = this.oauthService.getIdToken();
 
-        this.apiService.post(API_URLS.GOOGLE, { token: googleToken })
-          .subscribe({
-            next: (response) => {
-              localStorage.setItem('localAuthToken', response.access_token);
-              const payload = jwtDecode(response.access_token) as JwtPayload;
-
-              this.ngZone.run(() => {
-                switch (payload.role) {
-                  case 'profe':
-                    this.router.navigate(['/teacher']);
-                    break;
-                  case 'alumne':
-                    this.router.navigate(['/student']);
-                    break;
-                  default:
-                    this.router.navigate(['/']);
-                    this.oauthService.logOut();
-                    break;
-                }
-              });
-            },
-            error: (err) => {
-              console.error('Error autenticando con Google en el backend', err);
-            }
-          });
+        this.validateToken(googleToken);
       }
     });
+  }
+
+  private validateToken(token: string): void {
+    this.apiService.post(API_URLS.GOOGLE, { token })
+      .subscribe({
+        next: (response) => {
+          localStorage.setItem('localAuthToken', response.access_token);
+          this.authService.setAccessToken(response.access_token);
+          const payload = jwtDecode(response.access_token) as JwtPayload;
+
+          this.ngZone.run(() => {
+            switch (payload.role) {
+              case 'profe':
+                this.router.navigate(['/teacher']);
+                break;
+              case 'alumne':
+                this.router.navigate(['/student']);
+                break;
+              default:
+                this.router.navigate(['/']);
+                this.oauthService.logOut();
+                break;
+            }
+          });
+        },
+        error: (err) => {
+          console.error('Error autenticando con Google en el backend', err);
+        }
+      });
   }
 }

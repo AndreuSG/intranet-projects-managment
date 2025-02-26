@@ -6,6 +6,8 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { Select } from 'primeng/select';
 import { ButtonComponent } from "../../../../shared/components/button/button.component";
+import { StudyService } from '../../../../api/study/study.service';
+import { AuthService } from '../../../../auth/auth.service';
 
 @Component({
   selector: 'project-form',
@@ -16,12 +18,26 @@ import { ButtonComponent } from "../../../../shared/components/button/button.com
 export class ProjectFormComponent {
   formGroup: FormGroup;
 
-  validStudies = Object.values(Study);
+  validStudies: Study[] = [];
 
-  constructor(private ref: DynamicDialogRef) {
+  constructor(
+    private ref: DynamicDialogRef,
+    private studyService: StudyService,
+  ) {
+    this.studyService.findByTeacher().subscribe(
+      (studies) => {
+        this.validStudies = studies;
+      },
+      (error) => {
+        console.error('Error al obtener studies:', error);
+        this.validStudies = Object.values(Study);
+      }
+    );
+    
+
     this.formGroup = new FormGroup({
-      title: new FormControl<string | null>(null, [Validators.required]),
-      study: new FormControl<Study | null>(null , [Validators.required, this.validCourseValidator.bind(this)]),
+      titol: new FormControl<string | null>(null, [Validators.required]),
+      estudi: new FormControl<Study | null>(null , [Validators.required, this.validCourseValidator.bind(this)]),
     });
   }
 

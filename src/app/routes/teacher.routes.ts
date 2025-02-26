@@ -15,7 +15,7 @@ export const TEACHER_ROUTES: Routes = [
       data: { roles: ['profe'] }
    },
    { 
-      path: 'projectes/:id', 
+      path: 'projectes/:tab/:id', 
       loadComponent: () => import('../pages/teacher/project/project-detail/project-detail.component').then(mod => mod.ProjectDetailComponent),
       canActivate: [RoleGuard],
       data: { roles: ['profe'] }

@@ -41,21 +41,22 @@ export class HttpInterceptorService implements HttpInterceptor {
   
 
   private httpHeaderAddToken(request: HttpRequest<any>): HttpRequest<any> {
-    // Obtén los headers existentes
+
+    if (request.url.startsWith('https://accounts.google.com/')) {
+      return request;
+    }
+
     let headers = request.headers;
   
-    // Si el body no es FormData, agrega el content-type
     if (!(request.body instanceof FormData)) {
       headers = headers.set('content-type', 'application/json');
     }
   
-    // Obtén el token de localStorage
     const token: string | null = localStorage.getItem('localAuthToken');
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
 
-    // Clona la request con los headers actualizados
     return request.clone({ headers });
   }
 

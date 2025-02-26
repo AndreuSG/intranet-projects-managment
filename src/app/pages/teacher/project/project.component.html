@@ -8,9 +8,9 @@
   <shared-search-bar placeholder="Cercar projectes..." (search)="search=$event"></shared-search-bar>
 
   <div class="extra-actions">
-    <shared-course-filter (courseSelected)="this.selectedCourse = $event"></shared-course-filter>
+    <shared-course-filter (courseSelected)="this.selectedStudy = $event"></shared-course-filter>
     <shared-button text="Afegir projecte" icon="plus" type="success" (click)="openProjectFormDialog()"></shared-button>
   </div>
 </div>
 
-<project-list [search]="search" [selectedCourse]="selectedCourse"></project-list>
+<project-list [search]="search" [selectedCourse]="selectedStudy" [tab]="tab" [projects]="tab === 'school' ? schoolProjects : studentProjects" [isLoading]="isLoading"></project-list>

@@ -1,22 +1,29 @@
 import { Study } from "../enums/study.enum";
 import { Attachment } from "./attachment.interface";
 
+export interface ProjectList {
+  centre: Project[];
+  alumne: Project[];  
+}
+
 export interface Project {
   id?: number;
-  title: string;
-  study: Study;
-  creator: string;
+  titol: string;
+  creatPer: number;
+  estudi: Study;
+  attachments?: Attachment[];
 }
 
 export interface ProjectDetail extends Project {
-  description: string;
+  descripcio: string;
   creationDate: Date;
   lastUpdated: Date | null;
   startDate: Date;
   endDate: Date;
-  attachments: Attachment[];
 }
 
-export interface SchoolProject extends Project {
-  createdBy: string;
+export interface StudentProject extends ProjectDetail {
+  alumnesIds: number[];
 }
+
+

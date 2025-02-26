@@ -49,6 +49,10 @@
                 font-size: 18px;
                 font-weight: bold;
                 margin: 10px 0;
+                word-wrap: break-word; /* Permite que las palabras largas se dividan */
+                overflow-wrap: break-word;
+                white-space: normal; /* Permite que el texto pase a la siguiente línea */
+                max-width: 100%; 
             }
 
             .creator {
@@ -71,3 +75,11 @@
         }
     }
 }
+
+.loading-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  

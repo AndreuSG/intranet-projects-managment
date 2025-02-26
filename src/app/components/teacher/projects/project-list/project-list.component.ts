@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
 import { Project } from '../../../../models/interfaces/project.interface';
-import { Study } from '../../../../models/enums/study.enum';
 import { Router, RouterModule } from '@angular/router';
 import { Card } from 'primeng/card';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 
 @Component({
   selector: 'project-list',
@@ -14,6 +14,8 @@ import { Card } from 'primeng/card';
     CommonModule,
     Card,
     RouterModule,
+    ProgressSpinnerModule,
+    NgIf
   ]
 })
 export class ProjectListComponent {
@@ -23,39 +25,41 @@ export class ProjectListComponent {
   @Input()
   selectedCourse: string = 'Tots els estudis';
 
-  projects: Project[] = [
-    { id: 1, study: Study.asix, title: "AWS amb Terraform", creator: "David Bancells" },
-    { id: 2, study: Study.daw, title: "CMS agència de viatges", creator: "Xavier Martín" },
-    { id: 3, study: Study.dvrv, title: "Crear un joc 3D amb Unity", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 4, study: Study.iabd, title: "Ni idea", creator: "Francesc Barragan" },
-    { id: 5, study: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 6, study: Study.asix, title: "AWS amb Terraform", creator: "David Bancells" },
-    { id: 7, study: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 8, study: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" },
-    { id: 9, study: Study.daw, title: "CMS agència de viatges", creator: "Ainhowi Zaldúa Sureda" }
-  ];
+  @Input()
+  projects!: Project[];
 
+  @Input()
+  isLoading: boolean = true;
+
+  @Input()
+  tab: 'school' | 'student' = 'school';
+  
   filteredProjects: Project[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes['projects'] && this.projects) {
+      this.filteredProjects = [...this.projects];
+    }
     if (changes['search'] || changes['selectedCourse']) {
       this.searchProjects();
     }
-  }
+  }  
 
   searchProjects() {
     this.filteredProjects = this.projects
     .filter(project =>
-      this.selectedCourse === 'Tots els estudis' || project.study === this.selectedCourse
+      this.selectedCourse === 'Tots els estudis' || project.estudi === this.selectedCourse
     )
     .filter(project =>
-      project.title.toLowerCase().includes(this.search.toLowerCase())
+      project.titol.toLowerCase().includes(this.search.toLowerCase())
     );
   }
 
   navigateToProject(projectId: number): void {
-    this.router.navigate(['/teacher/projectes', projectId]);
+    this.router.navigate([`/teacher/projectes/${this.tab}`, projectId]);
   }
 }

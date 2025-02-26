@@ -11,7 +11,7 @@
   <shared-search-bar placeholder="Cercar estudiants..." (search)="onSearch($event)"></shared-search-bar>
 
   <div class="extra-actions">
-    <shared-course-filter (courseSelected)="onFilter($event)"></shared-course-filter>
+    <shared-course-filter (courseSelected)="onFilter($event)" [studies]="studentsStudies"></shared-course-filter>
     <p-button label="Donar de baixa" icon="pi pi-user-minus" (click)="unenrollStudents()" severity="danger" [disabled]="selectedStudents.length === 0" class="button"></p-button>
   </div>
 </div>

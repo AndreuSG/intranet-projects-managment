@@ -27,6 +27,7 @@ import { StudentService } from '../../api/student/student.service';
 })
 export class AdminComponent implements OnInit {
   students: Student[] = [];
+  studentsStudies: Study[] = [];
   filteredStudents: Student[] = [...this.students];
   selectedStudents: Student[] = [];
 
@@ -45,8 +46,8 @@ export class AdminComponent implements OnInit {
     this.loading = true;
 
     this.studentService.findAll().subscribe(students => {
-      console.log(students);
       this.students = students;
+      this.studentsStudies = [...new Set(students.map(student => student.estudis))];
       this.filteredStudents = [...students];
       this.loading = false;
     });
