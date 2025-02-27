@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../../../api/project/project.service';
 import { ProjectDetail } from '../../../../models/interfaces/project.interface';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ButtonComponent } from "../../../../shared/components/button/button.component";
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-project-detail',
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent, ProgressSpinnerModule],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss'
 })

@@ -8,9 +8,20 @@
   <shared-search-bar placeholder="Cercar projectes..." (search)="search=$event"></shared-search-bar>
 
   <div class="extra-actions">
-    <shared-course-filter (courseSelected)="this.selectedStudy = $event"></shared-course-filter>
+    <div class="paginator">
+      <p-paginator 
+        [rows]="pageSize" 
+        [totalRecords]="filteredProjects.length" 
+        (onPageChange)="onPageChange($event)" 
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} de {totalRecords}" 
+        [showPageLinks]="false" 
+        [showFirstLastIcon]="false" 
+      ></p-paginator>
+    </div>
+    <shared-course-filter (courseSelected)="selectedStudy = $event"></shared-course-filter>
     <shared-button text="Afegir projecte" icon="plus" type="success" (click)="openProjectFormDialog()"></shared-button>
   </div>
 </div>
 
-<project-list [search]="search" [selectedCourse]="selectedStudy" [tab]="tab" [projects]="tab === 'school' ? schoolProjects : studentProjects" [isLoading]="isLoading"></project-list>
+<project-list [tab]="tab" [projects]="paginatedProjects" [isLoading]="isLoading"></project-list>

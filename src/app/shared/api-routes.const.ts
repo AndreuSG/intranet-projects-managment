@@ -7,5 +7,5 @@ export const API_URLS = {
   STUDENT_PROJECTS: `/projects/alumn`,
   MODULES: `/curr-moduls`,
   CONFIRM_MODULES: `/selected-moduls`,
-  STUDIES: `/studies`,
+  STUDIES: `/group_study`,
 }

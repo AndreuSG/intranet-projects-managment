@@ -11,6 +11,8 @@ export interface Project {
   titol: string;
   creatPer: number;
   estudi: Study;
+  dataInici: Date;
+  dataFi: Date;
   attachments?: Attachment[];
 }
 
@@ -18,8 +20,6 @@ export interface ProjectDetail extends Project {
   descripcio: string;
   creationDate: Date;
   lastUpdated: Date | null;
-  startDate: Date;
-  endDate: Date;
 }
 
 export interface StudentProject extends ProjectDetail {

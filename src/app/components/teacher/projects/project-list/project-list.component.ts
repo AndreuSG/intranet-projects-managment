@@ -20,12 +20,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 })
 export class ProjectListComponent {
   @Input()
-  search: string = '';
-
-  @Input()
-  selectedCourse: string = 'Tots els estudis';
-
-  @Input()
   projects!: Project[];
 
   @Input()
@@ -34,30 +28,7 @@ export class ProjectListComponent {
   @Input()
   tab: 'school' | 'student' = 'school';
   
-  filteredProjects: Project[] = [];
-
-  constructor(
-    private router: Router,
-  ) {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['projects'] && this.projects) {
-      this.filteredProjects = [...this.projects];
-    }
-    if (changes['search'] || changes['selectedCourse']) {
-      this.searchProjects();
-    }
-  }  
-
-  searchProjects() {
-    this.filteredProjects = this.projects
-    .filter(project =>
-      this.selectedCourse === 'Tots els estudis' || project.estudi === this.selectedCourse
-    )
-    .filter(project =>
-      project.titol.toLowerCase().includes(this.search.toLowerCase())
-    );
-  }
+  constructor(private router: Router) {}  
 
   navigateToProject(projectId: number): void {
     this.router.navigate([`/teacher/projectes/${this.tab}`, projectId]);

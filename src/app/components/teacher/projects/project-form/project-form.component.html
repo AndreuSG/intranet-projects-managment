@@ -10,6 +10,10 @@
          <p-select inputId="study" formControlName="estudi" [options]="validStudies" appendTo="body" scrollHeight="auto" showClear></p-select>
          <label for="study">Estudi*</label>
       </p-floatlabel>
+      <p-floatlabel variant="in">
+         <p-datepicker formControlName="dataIniciFinal" inputId="dates" showIcon iconDisplay="input" selectionMode="range" appendTo="body"/>
+         <label for="dates">Data inici - Data final*</label>
+      </p-floatlabel>
    </div>
 
    <div class="form-footer">

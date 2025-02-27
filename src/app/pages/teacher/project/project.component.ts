@@ -11,6 +11,8 @@ import { StudyService } from '../../../api/study/study.service';
 import { Study } from '../../../models/enums/study.enum';
 import { ProjectService } from '../../../api/project/project.service';
 import { AuthService } from '../../../auth/auth.service';
+import { PaginatorModule } from 'primeng/paginator';
+
 
 @Component({
   selector: 'app-project',
@@ -19,7 +21,8 @@ import { AuthService } from '../../../auth/auth.service';
     BackButtonComponent,
     SearchBarComponent,
     ButtonComponent,
-    CourseFilterComponent
+    CourseFilterComponent,
+    PaginatorModule,
   ],
   providers: [DialogService],
   templateUrl: './project.component.html',
@@ -41,6 +44,9 @@ export class ProjectComponent implements OnDestroy {
 
   projectFormDialogRef: DynamicDialogRef<ProjectFormComponent> | undefined;
 
+  pageSize: number = 12;
+  currentPage: number = 0;
+
   constructor(
     public dialogService: DialogService,
     private studyService: StudyService,
@@ -54,10 +60,39 @@ export class ProjectComponent implements OnDestroy {
     });
   }
 
+  get filteredProjects(): Project[] {
+    const projects = this.tab === 'school' ? this.schoolProjects : this.studentProjects;
+    
+    return projects
+      .filter(project =>
+        this.selectedStudy === 'Tots els estudis' || project.estudi === this.selectedStudy
+      )
+      .filter(project =>
+        project.titol.toLowerCase().includes(this.search.toLowerCase())
+      );
+  }
+
+  get paginatedProjects(): Project[] {
+    const start = this.currentPage * this.pageSize;
+    return this.filteredProjects.slice(start, start + this.pageSize);
+  }
+
   ngOnDestroy() {
     if (this.projectFormDialogRef) {
       this.projectFormDialogRef.close();
     }
+  }
+
+  loadProjectes(): void {
+    this.projectService.findAll().subscribe((projects) => {
+      this.studentProjects = projects.alumne;
+      this.schoolProjects = projects.centre;
+      this.isLoading = false;
+    });
+  }
+
+  onPageChange(event: any): void {
+    this.currentPage = event.page;
   }
 
   openProjectFormDialog(): void {
@@ -74,6 +109,7 @@ export class ProjectComponent implements OnDestroy {
 
     this.projectFormDialogRef.onClose.subscribe((result: Project | undefined) => {
       if (result) {
+        console.log(result);
         this.isLoading = true;
         const projecte = { ...result, creatPer: this.authService.getId() };
         this.projectService.create(projecte, this.tab).subscribe((project) => {
@@ -84,11 +120,5 @@ export class ProjectComponent implements OnDestroy {
     });
   }
 
-  loadProjectes(): void {
-    this.projectService.findAll().subscribe((projects) => {
-      this.studentProjects = projects.alumne;
-      this.schoolProjects = projects.centre;
-      this.isLoading = false;
-    });
-  }
+  
 }

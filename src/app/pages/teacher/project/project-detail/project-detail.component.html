@@ -1,11 +1,16 @@
-<div *ngIf="isLoading">Carregant...</div>
-<div *ngIf="!isLoading && project">
+<div *ngIf="!isLoading && project; else loading">
   <h2>{{ project.titol }}</h2>
   <p>{{ project.descripcio }}</p>
-  <p><strong>Fecha de inicio:</strong> {{ project.startDate }}</p>
-  <p><strong>Fecha de fin:</strong> {{ project.endDate }}</p>
+  <p><strong>Fecha de inicio:</strong> {{ project.dataInici }}</p>
+  <p><strong>Fecha de fin:</strong> {{ project.dataFi }}</p>
 </div>
 <div *ngIf="!isLoading && !project">
   <p>No s'ha trobat el projecte.</p>
   <shared-button text="Tornar a la llista de projectes" (click)="returnToList()"></shared-button>
 </div>
+
+<ng-template #loading>
+  <div class="loading-overlay">
+    <p-progress-spinner ariaLabel="loading" />
+  </div>
+</ng-template>

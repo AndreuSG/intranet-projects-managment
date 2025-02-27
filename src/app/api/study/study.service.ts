@@ -12,6 +12,6 @@ export class StudyService extends ApiService {
   authService = inject(AuthService);
 
   findByTeacher(): Observable<Study[]> {
-    return this.get(API_URLS.STUDIES, { teacher: this.authService.getUsername() }).pipe(map((res) => res as Study[]));
+    return this.get(API_URLS.STUDIES, { email: this.authService.getUsername() }).pipe(map((res) => res as Study[]));
   }
 }

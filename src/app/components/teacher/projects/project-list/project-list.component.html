@@ -1,11 +1,11 @@
 <div *ngIf="!isLoading; else loading" class="project-list">
   <div class="grid">
-    <p-card *ngFor="let project of filteredProjects" (click)="navigateToProject(project.id!)" tabindex="0">
-        <div class="card-header">
-          <span class="category">{{ project.estudi }}</span>
-        </div>
+    <p-card *ngFor="let project of projects" (click)="navigateToProject(project.id!)" tabindex="0">
+      <div class="card-header">
+        <span class="category">{{ project.estudi }}</span>
+      </div>
       <div class="card-body">
-        <h2>{{ project.titol }}</h2>
+        <h2>{{ project.titol.length > 25 ? project.titol.slice(0,22) + '...' : project.titol }}</h2>
         <p class="creator">Creat per: <strong>{{ project.creatPer }}</strong></p>
       </div>
       <div class="card-footer">
@@ -14,7 +14,7 @@
     </p-card>
   </div>
 
-  <div class="no-results" *ngIf="filteredProjects.length === 0">
+  <div class="no-results" *ngIf="projects.length === 0">
     No s'han trobat projectes
   </div>
 </div>

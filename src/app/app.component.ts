@@ -40,8 +40,14 @@ export class AppComponent {
     private ngZone: NgZone,
     private router: Router,
   ) {
-    if (localStorage.getItem('localAuthToken')) {
-      this.authService.setAccessToken(localStorage.getItem('localAuthToken')!);
+    const token = localStorage.getItem('localAuthToken')
+    if (token) {
+      const isExpired = jwtDecode(token).exp! < Date.now() / 1000;
+      if (isExpired) {
+        localStorage.removeItem('localAuthToken');
+      } else {
+        this.authService.setAccessToken(token);
+      }
     }
   }
 

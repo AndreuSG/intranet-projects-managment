@@ -63,7 +63,7 @@ body {
 }
 
 main {
-  padding: 4% 5%;
+  padding: 3% 5%;
 }
 
 .page-header {
@@ -91,6 +91,7 @@ main {
   .extra-actions {
     display: flex;
     gap: 20px;
+    align-items: center;
   }
 }
 
