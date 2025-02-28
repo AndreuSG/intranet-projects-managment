@@ -1,35 +1,37 @@
 form {
+   width: 100%;
+
    .form-row {
       display: flex;
       gap: 1rem;
 
-      p-floatlabel {
+      .input {
+         display: flex;
+         flex-direction: column;
+         gap: 0.2rem;
          margin-bottom: 1rem;
          width: 100%;
-
+         
          &.field-30 {
             flex: 0 0 30%;
          }
-   
-         input {
+
+         p-floatlabel * {
             width: 100%;
          }
 
-         p-select {
-            width: 100%;
-         }
-
-         .error {
-            color: red;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
+         p-message {
+            margin-left: 0.3rem;
          }
       }
    }
+}
 
-   .form-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-   }
+.dialog-footer {
+   position: absolute;
+   bottom: 15px;
+   right: 15px;
+   display: flex;
+   justify-content: flex-end;
+   gap: 1rem;
 }

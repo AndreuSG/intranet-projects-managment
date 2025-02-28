@@ -12,7 +12,8 @@ import { Study } from '../../../models/enums/study.enum';
 import { ProjectService } from '../../../api/project/project.service';
 import { AuthService } from '../../../auth/auth.service';
 import { PaginatorModule } from 'primeng/paginator';
-
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-project',
@@ -23,6 +24,8 @@ import { PaginatorModule } from 'primeng/paginator';
     ButtonComponent,
     CourseFilterComponent,
     PaginatorModule,
+    SelectButtonModule,
+    FormsModule
   ],
   providers: [DialogService],
   templateUrl: './project.component.html',
@@ -30,6 +33,10 @@ import { PaginatorModule } from 'primeng/paginator';
 })
 export class ProjectComponent implements OnDestroy {
   tab: 'school' | 'student' = 'school';
+  tabs = [
+    { label: 'Centre', value: 'school' },
+    { label: 'Alumne', value: 'student' },
+  ]
 
   allProjects: ProjectList = { centre: [], alumne: [] };
   schoolProjects: Project[] = [];
@@ -85,8 +92,9 @@ export class ProjectComponent implements OnDestroy {
 
   loadProjectes(): void {
     this.projectService.findAll().subscribe((projects) => {
-      this.studentProjects = projects.alumne;
-      this.schoolProjects = projects.centre;
+      this.allProjects = projects;
+      this.studentProjects = projects.alumne || [];
+      this.schoolProjects = projects.centre || [];
       this.isLoading = false;
     });
   }
@@ -101,18 +109,21 @@ export class ProjectComponent implements OnDestroy {
     this.projectFormDialogRef = this.dialogService.open(ProjectFormComponent, {
       header: 'Nou projecte',
       width: '400px',
-      height: '300px',
+      height: this.tab === 'school' ? '35vh' : '45vh',
       modal: true,
       dismissableMask: true,
       closable: true,
+      inputValues: {
+        tab: this.tab,
+      }
     });
 
-    this.projectFormDialogRef.onClose.subscribe((result: Project | undefined) => {
+    this.projectFormDialogRef.onClose.subscribe((result?: Project) => {
       if (result) {
         console.log(result);
         this.isLoading = true;
-        const projecte = { ...result, creatPer: this.authService.getId() };
-        this.projectService.create(projecte, this.tab).subscribe((project) => {
+        const projecte = this.tab === 'school' ? { ...result, creatPer: this.authService.getId() } : result;
+        this.projectService.create(projecte, this.tab).subscribe(() => {
           this.loadProjectes();
         });
       }

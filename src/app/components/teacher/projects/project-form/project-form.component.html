@@ -1,22 +1,50 @@
 <form [formGroup]="formGroup">
    <div class="form-row">
-      <p-floatlabel variant="in">
-         <input type="text" pInputText formControlName="titol" id="title"/>
-         <label for="title">Títol*</label>
-      </p-floatlabel>
+      <div class="input">
+         <p-floatlabel variant="in">
+            <input type="text" pInputText formControlName="titol" id="title"/>
+            <label for="title">Títol*</label>
+         </p-floatlabel>
+         <p-message *ngIf="formGroup.get('titol')?.invalid && formGroup.get('titol')?.touched" severity="error" variant="simple" size="small">
+            Obligatori
+         </p-message>
+      </div>
    </div>
    <div class="form-row">
-      <p-floatlabel variant="in" class="field-30">
-         <p-select inputId="study" formControlName="estudi" [options]="validStudies" appendTo="body" scrollHeight="auto" showClear></p-select>
-         <label for="study">Estudi*</label>
-      </p-floatlabel>
-      <p-floatlabel variant="in">
-         <p-datepicker formControlName="dataIniciFinal" inputId="dates" showIcon iconDisplay="input" selectionMode="range" appendTo="body"/>
-         <label for="dates">Data inici - Data final*</label>
-      </p-floatlabel>
+      <div class="input field-30">
+         <p-floatlabel variant="in">
+            <p-select inputId="study" formControlName="estudi" [options]="validStudies" appendTo="body" scrollHeight="auto" showClear></p-select>
+            <label for="study">Estudi*</label>
+         </p-floatlabel>
+         <p-message *ngIf="formGroup.get('estudi')?.invalid && formGroup.get('estudi')?.touched" severity="error" variant="simple" size="small">
+            Obligatori
+         </p-message>
+      </div>
+      <div class="input">
+         <p-floatlabel variant="in">
+            <p-datepicker formControlName="dataIniciFinal" inputId="dates" showIcon iconDisplay="input" selectionMode="range" appendTo="body"/>
+            <label for="dates">Data inici - Data final*</label>
+         </p-floatlabel>
+         <p-message *ngIf="formGroup.get('dataIniciFinal')?.invalid && formGroup.get('dataIniciFinal')?.touched" severity="error" variant="simple" size="small">
+            Obligatori
+         </p-message>
+      </div>
    </div>
-
-   <div class="form-footer">
-      <shared-button icon="save" text="Guardar" type="success" (click)="saveProject()"></shared-button>
+   <div *ngIf="tab === 'student'" class="form-row">
+      <div class="input">
+         <p-multiselect
+            formControlName="alumnesAsignats"
+            [options]="students" 
+            [group]="true" 
+            placeholder="Alumnes" 
+            appendTo="body"
+            scrollHeight="250px" 
+            display="chip">
+         </p-multiselect>
+      </div>
    </div>
 </form>
+
+<div class="dialog-footer">
+   <shared-button icon="save" text="Guardar" type="success" (click)="saveProject()"></shared-button>
+</div>
